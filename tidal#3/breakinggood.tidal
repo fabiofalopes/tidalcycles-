@@ -1,0 +1,42 @@
+setcps (125/6/4)
+
+d1
+  $ stack [
+    degradeBy 0.35
+      $ sometimesBy 0.25 (# n (arpg "'hungarianMinor [12 14 15 16]/8"))
+      $ striate 4
+      $ n (arpg "'hungarianMinor [0 1 2 3 ]*4")
+        # s "flute"
+        # release (range 0.01 0.25 $rand)
+        # lpf (range 888 7231 $ slow 6 $cosine)
+        # resonance (range 0.01 0.255 $ fast 3 $rand)
+        # gain 0.75
+        # attack (range 0.01 0.4 $ slow 8 $ rand)
+        ,
+    degradeBy 0.5
+      $ struct (iter 3 "t(6,3)")
+      $ sometimesBy 0.25 (# n (irand 16))
+      $ sometimesBy 0.34 (jux rev)
+      $ sometimesBy 0.26 (# s "tabla2")
+      $ n "{[0 ~ ~] [1 . 5 3]/2}{[2 4 6]}"
+        # s "buchla"
+        # gain (range 0.67 0.87 $rand)
+        # attack (range 0.1 0.4 $ rand)
+  ]
+
+  d1 silence
+
+
+d2
+    $ stack [
+      degradeBy 0.01
+      $ striate 2
+        $ n (arpg "'min6 [22 14 22]*2")
+          # s "bev"
+          # cut "1"
+          # release 0.86
+          # attack (range 0.1 0.45 $ rand)
+    ]
+    # gain 0.85
+
+  hush

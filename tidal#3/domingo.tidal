@@ -1,0 +1,106 @@
+setcps (82/60/4)
+
+d4
+  $ stack [
+    degradeBy 0.8
+      $ n "<0?*12>"
+        # s "super808"
+      ,
+      degradeBy 0.5
+        $ n "0*12"
+          # s "superhat"
+          # release (range 0.01 0.5 $ slow 4 $saw*rand)
+          # pan rand
+          # gain 0.6
+          # hpf 800
+          # up "12 23"
+    ,
+    degradeBy 0.1
+      $ n "~ ~ 0 ~"
+        # s "superclap"
+    ,
+    degradeBy 0
+      $ n "[0 ~ . [0 1 0]/2]"
+        # s "sostoms"
+        # gain 0.75
+    ,
+    degradeBy 0.5
+      $ sometimesBy 0.6 (# attack 0.5)
+      $ sometimesBy 0.75 (# n (irand 16))
+      $ n "0?*6"
+        # s "tribalrand"
+        # release 0.6
+        # room 0.5
+        # size 0.25
+        # gain 0.77
+    ]
+    |-| n "<0 7 -7 -5 5 ~>.14 12@q 15?"
+
+
+d2
+  $ almostAlways (|-| up 24)
+  $ every 4 (fast 1.5)
+  $ sometimesBy 0.3 (|+| n (irand 2))
+  $ every 2 (|-| up 2)
+  $ almostAlways (|*| n "[0 ~ 12?q@]*2")
+  $ stack [
+    degradeBy 0
+      $ n (scale "yu" "<0 5 9 3 2 0 4>")
+        # s "supervibe"
+        |+| note "-24"
+    ,
+    degradeBy 0.7
+      $ n (scale "yu" "[5 12 8 4]*2")
+       # s "supervibe"
+      |-| note "-12"
+    ,
+    degradeBy 0.3
+      $ n (scale "yu" "<0 5 9 3 2 0 4>*12")
+        # s "supervibe"
+        |-| note "<24 -12 22 24*6>"
+    ,
+    degradeBy 0
+      $ n (scale "yu" "<12 5>")
+        # s "supervibe"
+        |-| note "24"
+  ]
+  |-| n "<0 7 -7 -5 5 ~>.14 12@q 15?"
+
+d2 silence
+
+d3
+  $ slow 4
+  $ stack [
+    degradeBy 0.3
+      $ n (scale "yu" "[0 1 5 9]*2")
+        # s "superhammond"
+        # voice 0.2
+        # decay (rangex 0.5 10 $rand)
+        # accelerate (rangex 0.001 0.025 $ slow 4 $ saw)
+        # semitone "4 3.9 4"
+        # resonance (range 0.02 0.2 $ fast 4 $ sine)
+        # cutoff (rangex 8000 18388 $ slow 2 $ square)
+      ,
+      degradeBy 0.4
+        $ slow 4
+        $ n (scale "yu" "[0 ~ ~ ~]")
+          # s "superpwn"
+      ,
+      degradeBy 0.7
+        $ sometimesBy 0.6 (# attack (range 0.01 0.9 $ square*rand))
+        $ n (arpg "'yu  [4 5]")
+          # s "superfork"
+          # slide (rangex 0.1 18 $ slow 4 $ rand)
+      ]
+      -- # cutoff (range 450 14939 $ slow 4 $ square*rand)
+      # lfo 1/16
+      # gain 0.7
+      # room 0.5
+      -- # size 0.25
+      -- |+| note "1 2"
+      -- |-| n "<0 7 -7 -5 5 ~>.14 12@q 15?"
+
+
+d3 silence
+
+      hush

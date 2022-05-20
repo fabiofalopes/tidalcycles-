@@ -1,0 +1,118 @@
+setcps (70/60/4)
+
+d5
+  $ slow 6
+  $ sometimesBy 0.7 (#attack 0.9)
+  $ jux rev
+  $ degradeBy 0.25
+  $ chunk 5 (fast 0.5 . (|- n 12))
+  $ off 0.75 (|+ 24) $ struct (iter 4 "t(12,7,5)")
+  $ stack [
+    degradeBy 0.99
+      $ n (scale "yu" "0 .. 7") # sound "superfm"
+    ,
+    degradeBy 0
+      $ n (scale "yu" "0 .. 7")
+        # sound "supersaw"
+    ]
+    # cutoff (range 880 1382 $slow 8 $sine)
+    # resonance (range 0.02 0.45 $rand)
+    # release (range 0.02 0.35 $rand)
+    # room 0.9
+
+    d5 silence
+
+d2
+  $ slow 1.58
+  $ stack [
+    degradeBy 0.7
+      $ n (scale "yu" "[0 2 5 6]*2")
+        # s "supersaw"
+        # voice 0.2
+        # decay 2
+        # accelerate 0.01
+        # semitone 2
+        # resonance 0.01
+      ,
+    degradeBy 0
+      $ n (scale "yu" "[3 5 8 11]*3")
+        # s "supersquare"
+        # decay (range 1 1.5 $ slow 2 $ rand)
+        # voice 0.07
+        # accelerate 0.01
+        # semitone 0.1
+        # resonance 0.01
+    ,
+    degradeBy 0
+      $ n (scale "yu" "[0 8 12 14]/3")
+        # s "superhex"
+    ,
+    degradeBy  0
+      $ n (scale "yu" "[0 0]*3")
+        # s "superfm"
+  ] # lfo (range 80 14291 $slow 2 $saw)
+  # resonance (range 0.125 0.345 $ slow 2 $ sine)
+
+
+d3 silence
+
+
+  d3
+    $ stack [
+        degradeBy 0.4
+          $ sometimesBy 0.9 (#attack (range 0.01 0.6788 $ rand))
+          $ sometimesBy 0.245 (#s "crow")
+          $ n (scale "yu" "[0 1]*4")
+            # s "supertron"
+            # accelerate (range 0.00001 0.0124 $slow 2 $cosine)
+            # voice (range 0.1 0.8 $sine)
+            # detune (range 0.01 0.08 $saw)
+    ]
+
+d4
+  $ stack [
+    degradeBy 0.5
+      $ n "[0 0 0@ 0]*2"
+        # s "super808"
+    ,
+    degradeBy 0.4
+      $ sometimesBy 0.23 (fast 1.5)
+      $ n "0 0 0"
+        # s "superhat"
+    ,
+    degradeBy 0.9
+      $ every 3 (fast 0.2)
+      $ sometimesBy 0.25 (# n (irand 16))
+      $ sometimesBy 0.2 (# s "tablasome")
+      $ sometimesBy 0.43 (jux rev)
+      $ n "[0 0 0]*4"
+        # s "tabla"
+        # release 0.5
+    ,
+    degradeBy 0.89
+      $ every 2 (# attack 1.6)
+      $ n (scale "yu" "[0 3 2 13 24]*2")
+        # s "grips808"
+    ,
+    degradeBy 0.5
+      $ n "{0 7 [0 0 5] . 2}{1}"
+        # s "tribalrand"
+        # cut "1"
+        # cutoff (rangex 874 5328 $ slow 4 $ sine)
+        # resonance (range 0.1 0.23 $ slow 2 $saw)
+        # gain 0.8
+    ,
+    degradeBy 0.9
+      $ sometimesBy 0.25 (# n (irand 2))
+      $ splice 8 "9" $ s "noise2"
+        # cut "1 2 3"
+        # attack 0.5
+        # hpf "800"
+  ] # distort 4
+
+
+
+
+d5 silence
+
+hush

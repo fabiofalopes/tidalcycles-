@@ -1,0 +1,67 @@
+setcps(70/60/4)
+
+d1
+  $ fast 1
+  $ sometimesBy 0.57 (#crush 0.2)
+  $ sometimesBy 0.25 (#distort 0.2)
+  $ sometimesBy 0.1 (jux rev)
+  $ stack [
+      degradeBy 0.1
+        $ n "0*2 . 4?"
+          # s "super808"
+          # rate 24 # cutoff (range 80 8000 $slow 4 $ sine)
+          # resonance (range 0.01 0.11 $ fast 2 $ sine),
+      degradeBy 0.4
+        $ n "~ 0"
+          # s "superclap",
+      degradeBy 0.4
+        $ n "0*12"
+          # s "superhat"
+          # n (irand 16)
+          # release (range 0.0 0.04 $ slow 2 $ rand)
+          # accelerate (range 1 1.9 $rand),
+      off 0.5 (|+ 12)
+        $ n " ~ 0?"
+          # s"supersnare"
+          # decay 0.1
+          ]
+
+d2
+  $ fast 0.25
+  $ sometimesBy 0.4 (jux (|+12))
+  $ sometimesBy 0.2 (degrade)
+  $ sometimesBy 0.25 (# room 1.2)
+  $ stack [
+      off 0.25 (|+12)
+        $ whenmod 16 4 (|+| 1.1)
+        $ jux (|+ 5 )
+        $ sometimesBy 0.4 (#s"tabla")
+        $ degradeBy 0.4
+        $ n "{0 0 0 . 1 2 3 }{0?? 0 0? . 1? 2? 3@q? }"
+          # s "tabla2"
+      ,sometimesBy 0.2 (#delay 16)
+        $ n "0 1? 3 4? 5 7 8"
+          # s "808"
+          # cut "1"
+          # cutoff (range 800 18888 $slow 4 $cosine)
+          # resonance (range 0.0099 0.222 $slow 2 $ rand)
+          # speed 0.9
+      ,sometimesBy 0.2 (#delay 0.5)
+        $ sometimesBy 0.9 (#n (irand 16))
+        $ degradeBy 0.35
+        $ swing 7
+        $ fast 3.5
+        $ n "[d(8,2) a(7,4) b(1,3)]*2"
+          # s"glitch2" # cutoff (range 800 8000 $rand)
+          # resonance (range 0.25 0.45 $fast 2 $sine)
+          # cut "1"
+   ]
+   # gain 0.4
+   # size 0.3
+   # hpf 280
+   # cutoff (range 800 18002 $slow 8 $sine)
+   # leslie 2
+   # room 0.11
+
+
+hush

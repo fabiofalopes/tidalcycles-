@@ -1,0 +1,135 @@
+setcps (165/60/4)
+
+d1
+  $ slow 8
+  $ almostAlways (|-| note 12)
+  $ stack [
+    degradeBy 0.09
+      $ sometimesBy 0.5 (off 0.25 (|+| note 7))
+      $ every 4 (off 0.7 (|+| note 9))
+      $ every 6 (whenmod 3 14 (off 0.9 (|+| note 12).(|*| attack (range 0.8 0.9 $sine))))
+      $ almostNever (off 0.01 (|-| note 5).(|-| gain 0.5))
+      $ every 16 (# n "[ b5(6,1,1)]")
+      $ superimpose (off 0.1 (|+| note 5).(# attack (range 0.88 0.96666 $ slow 4 $ sine)))
+      $ n " [ d5(3,2,1)]"
+        # s "superfm"
+        # release (range 0.04 0.279 $ rand)
+  ]
+  # gain 0.9
+  # lpf (rangex 888 939 $ sine)
+  # resonance (range 0.01 0.2 $ cosine)
+
+
+hush
+
+d2
+  -- $ whenmod 8 4 (
+  --   (|-| note 12)
+  --   .(# hpf 99)
+  -- )
+  $ sometimesBy 0.02 (off 0.25 (|-| note 5).(# attack (range 0.7 0.8 $rand)))
+  $ stack [
+    degradeBy 0.4
+      $ n (arpg "[d5(3,2,1)]")
+        # s "superfm"
+        # voice 2
+    ,
+    degradeBy 0.9
+      $ sometimesBy 0.25  (off 0.25 (|+| note 12 ).(|-| attack (range 0.2 0.27 $ square)))
+      $ n "[ d5(6,3,2)]"
+        # attack (range 0.1 0.2 $ slow 8 $ cosine)
+        # s "superfm"
+        # voice 0.3
+        # release 0.1
+        # gain "<0.75 0.77 0.8 0.88>*4"
+  ]
+  # lpf (range 900 14627 $ slow 8 $ sine )
+  # resonance (range 0.01 0.16 $ slow 4 $ cosine)
+  |-| up 12
+  # gain 0.78
+  # rate 1/16
+
+
+  d3
+    $ almostAlways (|+| note 12)
+    -- $ sometimesBy 0.5 (slow 4)
+    $ every 4 (slow 2)
+    $ stack [
+      degradeBy 0.5
+        $ almostNever (off 0.25 (|+| note 12))
+        $ off 0.75 (|+| note 5)
+        $ off 0.5 (|+| note 9)
+        -- $ superimpose ((# n (scale "zhi" "[d6 b6]*2")).(|-| attack (range 0.2 0.26 $ sine)))
+        $ n (arpg "'zhi <d6 b6 a6 c6>/2")
+          # s "supervibe"
+          # release (range 0.1 0.25 $ rand)
+      ,
+      degradeBy 0
+        $ almostAlways (off 0.25 (# n (scale "ritusen" "[d6 b6 c7]")))
+        $ n "[d6(3,5)]"
+          # s "supervibe"
+    ]
+    # hpf (range 5599 88 $ slow 3 $ sine)
+    |-| note "<12 9 3 6>"
+
+
+
+
+  d4
+    $ sometimesBy 0.2 (
+      (# s "timkahn:9 24 23 25")
+      .(off 0.25 (|-| note 12))
+      .(# n (scale "yu" "[9 9 2 4]*2"))
+      .(# release 0.2)
+      .(|-| up 24)
+      .(slow 1.5)
+      )
+    $ off 0.25 (
+      (|+| n (irand 2))
+      .(degrade)
+      )
+    $ every 2 (
+      (# release (range 0.45 0.5 $ sine))
+      .(|+| note 6)
+      )
+    $ every 3 (
+        (# release (rangex 0.2 0.5 $ square))
+        .(off 0.1 (# s "tablasome"))
+        .(# release (range 0.01 0.25 $ slow 4 $rand))
+        .(# n (irand 16))
+      )
+    $ every 8 (
+        (# s "novaperq")
+        .(# release 0.2)
+        .(# attack (range 0.1 0.2 $ sine))
+        .(# n (irand 4))
+      )
+    $ almostAlways (# release (range 0.1 0.2 $ slow 2 $ sine))
+    $ stack [
+      degradeBy 0.4
+        $ every 16 ((# n "2(4,1,1)").(# distort (range 0.05 0.15 $ rand)).(jux (almostNever rev)))
+        $ superimpose (
+          (off 0.25 (|-| note 12))
+          .(# gain 0.9)
+          .(sometimesBy 0.2 (off 0.6 (|-| note 3)))
+          )
+        $ sometimesBy 0.2 (
+           (off 0.5 (|+| n "4(6,2,2)"))
+          .(|*| gain "0.7 0.8")
+          .(|+| room 0.1)
+          .(# size 0.9)
+          )
+        $ sometimesBy 0.5 (
+             (superimpose (iter 2))
+            .(off 0.25 (|+| note 2))
+            )
+        $ n "<6(2,1,2) >"
+        # sound "kickla medivalrand"
+      ]
+      # room (range 0.2 0.4 $ rand)
+      # size (range 0.001 0.5 $ slow 2 $ saw)
+
+
+  d2 silence
+
+  hush

@@ -1,0 +1,69 @@
+setcps (140/60/4)
+
+d4
+  $ degradeBy 0.5
+  $ jux rev
+  $ chunk 2 (slow 0.25 . (|+ n 12))
+  $ off 0.5 (|+ 24)
+  -- $ struct (iter 4 "t(12,7)")
+  -- $ whenmod 16 4 (|+| 1.1)
+  $ sometimesBy 0.75 (jux rev)
+  $ stack [
+      splice 16 "0 9 2 1? 1 1 1 1 "
+        $ s "pdublean140:6"
+          # pan (range 0.1 0.9 $ rand)
+      ,degradeBy 0.9
+        $ jux rev
+        $ every 2 (|+| 9)
+        $ n "0 0 0"
+          # s "flute"
+          # release 0.2 # cutoff (range 200 1800 $ slow 4 $sine)
+          # resonance (range 0.01 0.25 $ fast 2 $ sine)
+          # gain 0.7
+          # room 2
+      ,degradeBy 0.8
+        $ off 0.75 (|-| 12)
+        $ sometimesBy 0.2 (# n (irand 12))
+        $ n " 1 2 4 5 8 3"
+          # s "flute"
+          # cut 1
+          # velocity (range 0.1 0.7 $ rand)
+          # gain 0.75 # cutoff (range 800 18000 $slow 2 $sine)
+          # crush 12
+          # room 0.15
+          # size 0.2
+          # resonance (range 0.01 0.25 $ rand)
+      ,degradeBy 0.8
+        $ jux (rev)
+        $ splice 4 "0 1 2 3 4 5" $ s "pdubxandr140:2"
+          # cutoff (range 1800 8800 $slow 4 $ sine)
+          # resonance (range 0.01 0.25 $ sine)
+          # gain 0.7
+          ]
+  -- # lpf (range 800 18800 $ rand)
+  # resonance (range 0.01 0.3 $rand)
+  # gain 0.7
+  # release (range 0.01 0.7 $slow 2 $ rand)
+  # room 0.1
+
+
+  hush
+
+d1 silence
+
+d9
+  $ sometimesBy 0.35 (#crush 2)
+  $ sometimesBy 0.15 (#distort 1.5)
+  $ stack [
+    degradeBy 0.1 $ n "0*2 . 4?" #s "super808" # rate 24 # cutoff (range 80 8000 $slow 4 $ sine) #resonance (range 0.01 0.11 $ fast 2 $ sine) ,
+    degradeBy 0.4 $ n "~ 0" # s "superclap",
+    degradeBy 0.4 $ n "0*12" # s "superhat" # n (irand 16) #release (range 0.0 0.04 $ slow 2 $ rand)  #  accelerate (range 1 1.9 $rand),
+    n " ~ 0?" # s"supersnare" # decay 0.1
+   ]
+
+
+d3 $fast 2 $ n (arpg "'scriabin [0,4,7,11,1?,2?,3?,12?]") # s "stab" # release (range 0.09 0.45 $ rand) #cutoff (range 200 18800 $ slow 8 $ sine) # resonance (range 0.01 0.25 $ rand)
+
+d4 $ n (arpg "'ritusen [12,1,2][24,1,2]  ") # s "superfork" # gain 0.4 #cutoff (range 1500 18000 $ slow 4 $ sine) # resonance (range 0.01 0.25 $ rand)
+
+d5 $ n (arpg "'diminished [16,1,7]") # s "supertron" # gain 0.5 #cutoff (range 500 8000 $ slow 2 $ sine) # resonance (range 0.01 0.25 $ rand)

@@ -1,0 +1,38 @@
+setcps (70/60/40)
+
+do
+
+let b = range (choose [(0.125*3),0.0625*3] , 12000 )
+
+
+
+d6
+$ fast 4
+$ degradeBy 0.4
+$ sometimesBy 0.9 (# n (irand 19))
+$ chunk 2 (slow 0.75 . (|+ n 12))
+$ off 0.2 (|+ 7)
+$ stack[
+    s "pidmic170:4*4 pidmic170*2" #cut "1" #cutoff (range 800 19999 $ slow 4 $cosine)
+-- ,   s "pdubxandr140:5*8" # cut "3"
+,   s "pdubxandr140:4*24" # cut "2" #lpf 5
+    ]
+    # cutoff (range 800  19999 $slow 4 $ rand )
+    # resonance (range 800 8000 $ slow 2 $ cosine)
+    # lpf 15890
+    # gain 0.6
+    # room 0.028
+
+
+hush
+
+
+
+d1
+$ stack [
+  n "6 0 6 3 6 3 "
+      # s "pgoogle84"
+      # cut "1"
+      # n (irand 4)
+  ,   n "0 0 0 0" # s "kickla"
+]

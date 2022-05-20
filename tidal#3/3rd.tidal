@@ -1,0 +1,12 @@
+setcps (140/60/4)
+
+
+
+d1 $ stack [
+  n "0 " # s "superreese" #accelerate 0.1 #voice 1 #detune 24,
+  n (arpg "'major7 [0,4,7,11]") # s "superchip"
+  ]
+
+
+
+hush

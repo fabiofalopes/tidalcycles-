@@ -1,0 +1,50 @@
+setcps (140/60/4)
+
+d1
+  $ jux (|+| s "jv")
+  $ whenmod 3 4 (|+| note 24)
+  $ off 0.75 (|*| 12)
+  $ off 4 (|+| 7).sometimesBy 0.4 (jux rev)
+  $ sometimesBy 0.2 (# accelerate "0.001 0.01")
+  $ stack [
+    degradeBy 0.1
+      $ n (scale "ritusen" "[0(1,8) 4(3,8) 6(3,8,2) 7(3,4,2)]/2")
+        # s "superzow"
+        # voice 0.9
+        # accelerate 0.001
+        # semitone 0.2
+        # resonance (range 0.04 0.2 $ rand)
+        # release (rangex 0.1 0.5 $ slow 2 $ rand)
+        # lpf (rangex 483 11482 $ slow 4 $ sine)
+        # attack (range 0.5 0.7 $ slow 3 $ rand)
+        |-| note 12
+  ] # gain 0.7
+
+  d2
+    $ almostAlways (# swing 5 16)
+    $ stack [
+      degradeBy 0.4
+        $ almostAlways (|-| up 12)
+        $ n (scale "ritusen" "[0(1,1,4) 4(2,1) 6(3,1)]/3")
+          # s "supersaw"
+          # release 0.6
+          # resonance (range 0.02 0.45 $ slow 2 $ rand)
+          # lpf (range 800 8000 $ slow 8 $cosine)
+          |-| note 12
+    ] # room 0.3 # size 0.4 # leslie 0.1 # gain 0.85
+
+d1 silence
+
+d3
+  $ slow 2
+  $ off 0.1 (# slide 3)
+  $ off 0.75 (# s "supersquare")
+  $ sometimesBy 0.5 (off 0.25 (|-| note 12)).struct (iter 6 "t(4,7,2)")
+  $ stack [
+  degradeBy 0.75
+    $ n (scale "ritusen" "[d6(4,4,2) bb6(2,4) a6(2,16,2)]/7")
+      # s "supersaw"
+      # gain 0.7
+      |-| note "2 5"
+      # release 0.1
+  ] # room 0.2 # size 0.1 # leslie 0.5 # delay (1/3)

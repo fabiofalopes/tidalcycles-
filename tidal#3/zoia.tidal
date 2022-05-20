@@ -1,0 +1,62 @@
+setcps (140/60/4)
+
+d1
+  $ degradeBy 0.1
+  $ stack [
+    degradeBy 0
+      $ off 0.5 (# leslie 13)
+      $ n (scale "yu" "<[0 2 4 9] 0>")
+        # s "segalchord"
+        # release (range 0.01 0.25 $ sine)
+        # delay 1/12
+        # leslie 1/12
+    ,
+    degradeBy 0.9
+      $ sometimesBy 0.1 (
+          (# s "segalchord:8").
+          (# release "<0.01 0.25 0.4 0.3 0.1 0.22 0.12 >").
+          (# delay (rangex 0.1 0.25 $ rand )).
+          (# attack 0.15)
+        )
+      $ sometimesBy 0.5 (
+          (|+| s "segalchord:12")
+        )
+      $ almostAlways (# attack (range 0.4 0.5 $ slow 5 $ rand))
+      $ off 0.75 (|-| note 6)
+      $ every 4 (
+        (# n (scale "yu" "12")).
+        (jux rev)
+        )
+      $ every 8 (
+        (|*| n (scale "yu" "12 24")).
+        (whenmod 2 4 (fast 2)).
+        (# room 2)
+        )
+      $ n (scale "yu" "[0 4 5 7]")
+        # s "segalchord:3"
+        # release (rangex 0.25 0.01 $ rand*sine)
+        |-| note 12
+        # gain (range 0.01 0.95 $ rand*square)
+  ]
+  -- # lpf (
+  --     (range 80 18028 $ slow 8 $ sine)
+  --   )
+  # resonance (
+      (rangex 0.01 0.25 $ fast 8 $cosine*(square)*rand)
+    )
+  # gain 1.2
+
+
+d2
+  $ stack [
+    degradeBy 0.9
+      $ almostAlways (# attack 0.1)
+      $ n "[0 0 0 0 0]"
+        # s "super808"
+        # gain 1.2
+        |-| up 12
+        # distort 2
+        # release 0.1
+  ] # gain 0.9
+
+  hush

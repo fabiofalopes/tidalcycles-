@@ -1,0 +1,53 @@
+setcps(140/60/4)
+
+
+d1
+  $ stack [
+    degradeBy 0.25
+      $ almostAlways (# swing 4 6)
+      $ n (arpg "'bartok [<0 1 2 3>][0 4]")
+        # s "tablasome"
+        # release 0.5
+    ,
+    degradeBy 0
+      $ n "0*2"
+        # s "novaperq"
+        # release 0.35
+        |-| note 2
+        |*| gain 0.89
+    ,
+    degradeBy 0
+      $ n "[~ 7]*2"
+        # s "novaperq"
+        # release 0.35
+    ,
+    degradeBy 0
+      $ n (scale "yu" "[0 9 7 2]")
+        # s "buchla"
+    ]
+
+d2
+  $ degradeBy 0
+  $ every 4 (iter 2 |-| rev)
+  $ every 3 (degrade)
+  $ sometimesBy 0.43 (# n (irand 3))
+  $ rarely rev
+  $ almostNever (#attack (range 0.45 0.47 $ sine))
+  $ n "9*6"
+    # s "sofx"
+    # release 0.15
+    # attack 0.01
+    # gain 0.55
+    # pan rand
+    |-| note 4.2
+
+d3
+  $ stack [
+    degradeBy 0
+      $ almostAlways (# n (irand 4))
+      $ n "45"
+        # s "stab"
+        # attack 0.3
+  ]
+
+  d5 silence

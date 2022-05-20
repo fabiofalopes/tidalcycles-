@@ -1,0 +1,139 @@
+setcps (70/60/4)
+
+d1 silence
+
+d1
+  $ degradeBy 0.6
+  $ sometimesBy 0.5 (#crush 2)
+  $ sometimesBy 0.2 (jux rev)
+  $ stack[
+    degradeBy 0.9 --perq 1
+      $ sometimesBy 0.3 (# irand 12)
+      $ n "0*16"
+        # s "tabla"
+        # release (range 0.01 0.3 $ slow 0.2 $ rand),
+    degradeBy 0.7
+      $ n "1*16"
+        # s "808"
+        # release (range 0.01 0.09 $ slow 2 $ cosine),
+    degradeBy 0.4
+      $ n "4*6"
+        # s "808"
+        # release (range 0.02 0.09 $ rand),
+    degradeBy 0.3
+      $ sometimesBy 0.4 (# n (irand 1))
+      $ n (arpg "'ritusen 0 1 2 3 4 5 6")
+        # s "formanta"
+        # distort 14
+        # cut "1"
+        # cutoff (range 800 15900 $slow 4 $sine)
+        # resonance (range 0.01 0.25 $rand)
+  ]
+  # accelerate (range 3 13 $rand)
+  # cutoff (range 80 1922 $slow 2 $ rand)
+  # resonance (range 0.02 0.2 $rand)
+  # hpf 650
+
+
+hush
+
+d2
+  $ chunk 6 (slow 0.135829 . (|- n 12))
+  $ chunk 1 (slow 0.75 . (|- n 12))
+  $ chunk 2 (slow 0.25 . (|- n 24))
+  $ degradeBy 0.2
+  $ every 4 (#n (irand 12))
+  $ sometimesBy 0.15 (# delay 16)
+  $ every 4 (slow 2)
+  $ off 0.25 (|- 12)
+  $ stack  [
+      fast 2
+        $ degradeBy 0.8
+        $ sometimesBy 0.2 (jux rev)
+        $ n "0 0 0 0"
+          # s "soskick"
+          # cutoff (range 800 12838 $sine),
+      slow 2
+        $ sometimesBy 0.2 (#room 0.9)
+        $ n "1*6 "
+          # s "dx7so"
+          # cut "1"
+          # gain 0.7,
+      fast 0
+        $ sometimesBy 0.5 (# n (irand 16))
+        $ n "7*16"
+          # s "timkahn"
+          # cut "2",
+      fast 2
+        $ jux rev
+        $ n "6"
+          # s "sofx?"
+          # cut "3"
+          # cutoff (range 90 18288 $sine)
+          # room 2
+          # gain 0.7
+    ]
+    # cutoff (range 80 8283 $slow 2 $sine)
+    # room 0.2
+    # size 0.2
+
+d3
+  $ stack [
+    degradeBy 0.9
+      $ n "[db4(1,6,1) . g6(4,14,1)] [db3(16,2,4)]"
+        #s "superfm"
+  ]
+
+
+d1
+  $ whenmod 16 2 (|-| 12)
+  $ off 0.25 (|+| 12)
+  $ swingBy 2 3
+  $ stack [
+    -- degradeBy 0
+      -- $ n "[b2(4,4) f1(3,8) b2(6,2) c1(3,3)]/4"
+    --     # s "arpy"
+    --     # cutoff (range 80 8000 $ slow 2 $ sine)
+    --     # resonance (range 0.1 0.2 $sine)
+    --     # gain 0.9
+    --     # room 0.1,
+    degradeBy 0.1
+      $ n "[b2(4,6) f9(3,8) b11(6,2) c1(3,3)]*0.25"
+        # s "gripspercs"
+        # cut 1
+        # release (range 0.25 0.5 $ slow 2 $rand)
+        # hpf 80
+        # n (irand 16),
+    degradeBy 0.75
+      $ n "[b2(4,6) f9(3,8) b11(6,2) c1(3,3)]/3"
+        # s "gripsfx" # release (range 0.01 0.4 $ rand)
+  ] # size 0.5
+
+
+  d2
+  $ slow 8
+    $ stack [
+      degradeBy 0.9
+          $ sometimesBy 0.2 (# room 0.2)
+          $ sometimesBy 0.3 (# n (irand 12))
+          $ n "b4(4,6) c1(4,6) c4(4,6)"
+            # s "glitchonesretro"
+            # cutoff (range 593 17290 $slow 4 $cosine)
+            # resonance (range 0.01 0.2 $rand)
+            # cut "1",
+      degradeBy 0.8
+          $ sometimesBy 0.2 (# room 0.3)
+          $ n "c3(4,12)"
+            # s "breakmutante"
+            # cut "9"
+            # n (irand 2),
+      degradeBy 0.8
+          $ sometimesBy 0.1 (jux rev)
+          $ n "{d2(3,6)}{d12(12,3)}"
+            # s "superreese"
+            # cutoff (range 800 2942 $sine)
+            # cut "5"
+    ]
+
+
+    hush

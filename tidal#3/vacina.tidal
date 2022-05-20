@@ -1,0 +1,72 @@
+setcps (140/60/4)
+
+hush
+
+d1 silence
+
+d1
+  $ slow 16
+  $ degradeBy 0.3
+  $ sometimesBy 0.25 (# attack (rangex 0.0001 1.8282 $ slow 2 $ sine))
+  $ every 3 (# s "superchip")
+  $ sometimesBy 0.25 (jux rev)
+  -- $ struct (iter 6 "t(3,2)")
+  $ off 6 (|+ 2)
+  $ stack [
+    degradeBy 0.1
+      $ sometimesBy 0.5 (# attack (range 0.1 0.39 $ rand))
+      $ struct (iter 6 "t(6,8,2)")
+      $ off 0.25 (|+ 24)
+      $ n (scale "yu" "{0 ~ ~ ~ 2 ~ ~ ~ 5 ~ ~ ~ 7@ ~ ~ ~}{7 12?}")
+       # s "superzow"
+       # room (range 0.25 0.35 $ slow 8 $ rand)
+       # size (range 0.01 0.9992 $ sine)
+       # detune (range 0.25 0.5 $ saw*rand)
+       # gain 0.88
+    ,
+    degradeBy 0.1
+      $ sometimesBy 0.25 (# voice (range 1.999 2 $ sine))
+      $ struct (iter 6 "t(3,2,7)")
+      $ n "{12 17 19 12 9 15 6 17}{7 12}"
+        # s "superfm"
+        # voice 2
+        # gain 0.85
+    ,
+    degradeBy 0.3
+      $ n (scale "egyptian" "0 1 2 3")
+        # s "supersaw"
+        # release (range 0.01 0.045 $ fast 2 $ rand)
+        # voice 0.2
+        # decay 0.15
+        # semitone 0.25
+        # resonance 0.24
+    ,
+    degradeBy 0.4
+      $ n (scale "egyptian" "{0 0 0 0 0 0}")
+        # s "supersaw"
+        # release (range 0.01 0.045 $ fast 2 $ rand)
+        # voice 0.2
+        # decay 0.15
+        # semitone 0.25
+        # resonance 0.14
+    ,
+    degradeBy 0
+      $ almostAlways (# attack 0.999)
+      $ n (scale "egyptian" "0 4 5 9 9 2 4 4 5 5 9 13")
+        # s "supersaw"
+        # release (range 0.01 0.015 $ fast 2 $ rand)
+        # voice (range 0.1999 0.2 $ saw)
+        # decay 0.15
+        # semitone 0.25
+        # resonance 0.24
+        # gain 0.85
+  ]
+  # cutoff (rangex 1143 11829 $ slow 2 $cosine)
+  # resonance (range 0.01 0.25 $ rand)
+  # attack (rangex 0.5 0.95 $ sine*rand)
+  # delay 16
+  # room  0.5
+  # size (range 0.5 1 $ rand)
+
+
+  hush

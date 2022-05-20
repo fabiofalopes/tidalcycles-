@@ -1,0 +1,28 @@
+setcps (140/60/4)
+
+d1
+  $ degradeBy 0.9
+  $ every 2 (fast 0.99)
+  $ sometimesBy 0.1 (# n (irand 5))
+  $ sometimesBy 0.2 (jux rev)
+  $ stack [
+    n "~ 3" # s "808",
+    degradeBy 0.6 $ n "~ . 0 0?" # s "808",
+    sometimesBy 0.5 (fast 2) $ n "1 1 1 1" # s"808",
+    sometimesBy 0.7 (slow 2) $ degradeBy 0.6 $ n "2 2 2" # s "808",
+    n "4 4" # sound "808",
+    degradeBy 0.5 $ every 4 (jux rev) $ n "5 5 .  5 5 5 5" # sound "808",
+    degradeBy 0.8 $ n "4*6" # s "808"
+    ] # room 1
+
+d1 silence
+
+d2 $ degradeBy 0.75 $every 2 (slow 4) $ sometimesBy 0.4 (# n (irand 16))$n "0 0 0 0 0? 0"  # s "909" # speed 0.1 # release 0.4 # velocity (1-rand) # room 0.5
+
+d2 silence
+
+d3 $ degradeBy 0.9 $every 4 (slow 2) $sometimesBy 0.5 (fast 1.5 )$ every 3 (#n "0 0 0 0 0 0")$ n "0 0 0 0" # s "clubkick:3" # room 0.25 # velocity (1 - sine*rand) # n (irand 16)
+
+d3 silence
+
+  hush

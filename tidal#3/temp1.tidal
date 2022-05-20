@@ -1,0 +1,57 @@
+setcps (140/60/4)
+
+Sound.Tidal.Chords
+
+d1 silence
+d2 silence
+d3 silence
+d4 silence
+d5 silence
+d6 silence
+d7 silence
+d8 silence
+d9 silence
+
+
+
+    hush
+
+-- s "supersquare" #voice 0.2 #decay #accelerate #semitone #resonance #lfo #rate #pitch1
+-- s "supersaw" #voice 0.2 #decay #accelerate #semitone #resonance #lfo #rate #pitch1
+-- s "superpwm" #voice 0.2 #decay #accelerate #semitone #resonance #lfo #rate #pitch1
+-- s "superchip" #slide #rate #accelerate #pitch2 #pitch3 #voice
+-- s "superhoover" #slide #decay #accelerate
+-- s "superzow" #decay #accelerate #slide #detune
+-- s "supertron" #accelerate #voice #detune
+-- s "superreese" #accelerate #voice #detune
+-- s "supernoise" --Digital noise in several flavors with a bandpass filter
+-- s "superstatic" #voice #accelerate #pitch1 #slide #resonance
+-- s "supercomparator" #voice #decay #accelerate #resonance #lfo #rate #pitch1
+
+d1 $ stack [ --Drum synthesis
+  n "0 0 " # s "superkick"  -- #accelerate 222 #pitch1 24 #decay 2,
+  --n: controls the kick frequency in a nonstandard way
+  n "0 0 0 0 " # s "super808" -- #n 1 # rate 16 #voice 12,
+  n "0*12 " # s "superhat" -- #n 0*sine #  accelerate 12 ,
+  n "~ 0 " # s "supersnare" -- # decay 1 # accelarate 0
+  n " " # s "superclap" -- #n #delay #rate #pitch1
+  n " " # s "soskick" -- #midinote #pitch1 #voice #pitch2 #speed #freq
+  n " " # s "soshats" -- #resonance #pitch1 #sustain #freq
+  n " " # s "sostoms" -- #voice #sustain #freq
+  n " " # s "sossnare" -- #voice #semitone #pitch1 #resonance #freq
+]
+
+hush
+
+d2 $ stack [ --Physical modelling
+    s "supermandolin" #sustain #accelerate #detune
+    s "superpiano" #velocity #sustain #detune #muffle #stereo
+    s "superfork" # accelerate
+    s "superhammond" --ver em http://tidalcycles.org/docs/reference/synthesizers/#additive-synthesis e experimentar
+    s "supervibe" #decay #velocity #accelerate #modamp #modfreq #detune
+    s "supermandolin" #sustain #accelerate #detune
+    s "superpiano" #velocity #sustain #detune #muffle #stereo
+    s "superfork" # accelerate
+    s "superhammond" --ver em http://tidalcycles.org/docs/reference/synthesizers/#additive-synthesis e experimentar
+    s "supervibe" #decay #velocity #accelerate #modamp #modfreq #detune
+]

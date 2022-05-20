@@ -1,0 +1,136 @@
+setcps (70 /60/4)
+
+d1
+$ rev
+  $ degradeBy  0.9
+  $ every 3 (#n (irand 3))
+  $ every 6 (jux rev)
+  $ every 6 (slow 0.75)
+  $ sometimesBy 0.2 (# cutoff (range 80 18872 $slow 2 $ rand))
+  $ off 0.5 (|+ 24)
+  $ stack[
+      degradeBy 0.9
+        $ n "9(3,1)"
+          # s "mizo"
+          # cut "1"
+          ,
+      degradeBy 0.8
+        $ n "18(4,1) 22(2,1,2)"
+          #s "mizo"
+          # cut "1"
+          ,
+      degradeBy 0.9
+        $n "44(16,16,16)"
+          # s "mizo"
+          # release (range 0.01 0.2 $ rand)
+          ,
+      degradeBy 0.9
+        $n "~ 7?(3,2)"
+          # s "mizo"
+          # distort 2
+          ,
+      degradeBy 0.9
+        $n " 1(3,1) 1(3,1) 1 1(6,2)"
+          # s "mizo"
+          # cut "2"
+          ,
+      degradeBy 0.9
+        $ every 3 (fast 1.5)
+        $ n "12(12,2)"
+          # s "superhat"
+  ]
+
+
+
+
+  d2
+    $ degradeBy 0.9
+    $ fast 0.25
+    $ every 3 (jux (|- 3))
+    -- $ off 0.25 (|+| 12)
+    $ off 0.75 (|-| 3)
+    -- $ chunk 16 (slow 0.125 . (|- n 24))
+    $ sometimesBy 0.4 (jux rev)
+    $ sometimesBy 0.9 (# delay 16)
+    $ stack [
+        degradeBy 0.89
+            $sometimesBy 0.01 (# s "superchip")
+            $ n "[db4(6,5) f3 g4?(3,2,1) c4 bb6 c3(3,6)]*2"
+               # s "superfork"
+               # n (arpg "'romanianMinor [0 5 6 7 2 2]")
+               # lpf (range 880 15000 $ slow 8 $sine)
+               # resonance (range 0.01 0.9 $rand)
+               ,
+        degradeBy 0.7
+             $ n (arpg "'romanianMinor [0 5 6 7 2 2]")
+                # s "superhat"
+                # lpf (range 888 12888 $sine)
+                ,
+        degradeBy 0.1
+            $ n "[db4(3,3) bb5(2,2) g5(1,5) bb5(3,4)]"
+                # s "superchip"
+                # n (arpg "'romanianMinor [0 1 2]")
+                # release (range 0.05 0.3 $sine)
+    ]
+    # cutoff (range 888 16688 $slow 4 $cosine)
+    # resonance (range 0.2 0.5 $rand)
+    # room 0.4
+    # size 0.6
+
+
+
+d3
+  $ stack[
+    degradeBy 0
+      $ n (arpg "'mixolydian [ 9 9 9]/4")
+        # s "jv1080"
+        # cut "1"
+        ,
+    degradeBy 0
+      $ n (arpg "'mixolydian [0 3 7 9 2 7 9 0]/3 [5 7 8 6 4 2 6 7 2]/2.4")
+        # s "jv1080"
+        # cut "2"
+        ,
+    degradeBy 0
+      $ n (arpg "'mixolydian [9 7 6 5 4 3]/2")
+        # s "jv1080"
+        ,
+    degradeBy 0
+      $ n (arpg "'mixolydian [0 9 8]*2 [6 8 9]/3 [2 8 7]")
+       # s "arpy"
+  ]
+
+    hush
+
+d3 silence
+
+    d4
+      $ stack [
+        degradeBy 0.1
+          $ striate 3 $ n "7 1 2 3 4 "
+            # s "tablasome"
+            # cut "1"
+            # speed ("1")
+            # release (range 0.01 0.25 $cosine)
+            ,
+        degradeBy 0.0
+          $ striate 6 $ n "7 8 7 8" # s "pdubxandr140:5"
+            # cut "2",
+        degradeBy 0.0
+          $ sometimesBy 0.2 (# delay 16)
+          $ sometimesBy 0.15 (jux rev )
+          $ sometimesBy 0.2 (# n (irand 12))
+          $ striate 2 $ n "5(16,5)" # s "pds20140"
+            # release (range 0.1 0.25 $rand)
+            # cut "5"
+            # lpf (range 1828 20738 $ slow 8 $ sine)
+            # resonance (range 0.02 0.35 $ slow 2 $ cosine)
+            # release (range 0.01 0.2 $ saw)
+            # speed "6"
+            # leslie 2
+            # gain 0.8
+            # hpf 572
+        ]
+        # release (range 0.15 0.18 $ sine)
+
+        d4 silence
