@@ -1,3 +1,4 @@
 # tidalcycles-
 
-Some random experimets #1 using tidalcycles -- folder tidal
+This repo contains some experiments that i've been making during the past year, learning and having fun with tidalcycles.
+
