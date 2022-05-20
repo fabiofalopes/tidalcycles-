@@ -1,0 +1,8 @@
+
+
+
+d1 $ n (off 0.125 (|+ 7)  "<c*2 a(3,8) f(3,8,2) e*2>")
+  # sound "supermandolin"
+  # legato 2
+
+setcps (125/60/4)

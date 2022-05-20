@@ -1,0 +1,56 @@
+setcps(140/60/4)
+
+d1
+  $ someCycles (|+| up 4)
+  $ off 0.45 (
+      (|+| up "3")
+    )
+  $ off 0.12 (
+      (|*| up 0.85).
+      (# release (range 0.24 0.6 $ slow 4 $ rand)).
+      (every 4 (# gain 0.9)).
+      (# gain 0)
+    )
+  $ n(scale "yu" "{[b5 e5]}")
+  # s "superfm"
+  # lpf (range 823 12381 $ slow 3 $ sine)
+  # release 0.4
+
+d2
+  $ someCycles (|+| up 6)
+  $ degradeBy 0.7
+  $ n(scale "yu" "{[e4 b4 g4]@1.23 }")
+  # s "supersquare"
+  # n (irand "2 4 5 9 4")
+  # distort 0.2
+  # voice "{[2 4 5]}%1.35"
+
+
+d3
+  $ someCycles (
+      every 3 ((|+| n 3).(jux rev).(#hpf "{[123 164 178]}%1.254")).
+      (# gain 0.79).
+      (# attack  (range 0.8 0.959 $ fast 3 $ sine)).
+      (# cut "{[4 2 1]}")
+    )
+  $ superimpose(
+      (|+| s "jv1080")
+    )
+  $ off 0.5 (
+      (|-| up 8).
+      (# gain (range 0.33 0.97 $ fast 8 $ sine)).
+      (degradeBy 0.2).
+      (# cut "2")
+    )
+  $ degradeBy 0
+  $ n ("{[a4'msharp5 ~ , ~ b4'ninesus4]}")
+    # s "supersaw"
+    # gain 0.7
+    # lpf (range 412 12312 $ slow 5 $ sine)
+    # resonance (range 0.50 0.2341 $rand)
+    # cutoff "{[12654 17183 16237]}%1.4"
+
+
+
+
+hush
