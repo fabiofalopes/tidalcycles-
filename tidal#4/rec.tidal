@@ -1,0 +1,69 @@
+setcps (145/60/4)
+
+
+d1
+  $ rarely (
+      (# n (scale "yu" "{[d6 b6 g6 e6]}%2.25")).(off 0.0125 ((|+| note 7).(#attack 0.6).(#crush 2).slow 2).(#room 0.24))
+    )
+  $ every 6 (
+    (# n (scale "yu" "{[d6 b6 g6 e6]}%2.25")).
+      (off 0.2459 (|+| note 12)).
+      (#attack (range 0.2 0.258 $ slow 3 $ sine)).
+      (|-| note 6)
+    )
+  $ every 8 (
+    (# n (scale "yu" "{[d6 b6 g6 e6]}%2.25")).
+      (off 0.5 (|+| note 2)).
+      (#attack (range 0.7 0.758 $ slow 6 $ sine)).
+      (# room 0.26).
+      (|-| note 12)
+    )
+  $ n "{[d6 b6 g6 e6]}%2.25"
+    # s "supersquare"
+    # voice "{0.2 0.2235 0.0234235 0.06343}%1.25"
+    # release 0.2
+    # release (range 0.2 0.457 $ sine)
+    # distort 1.012
+    # lpf (range 901 12712 $ slow 23 $ sine)
+    # resonance "0.1230 0.0124 0.512354"
+
+    hush
+
+
+    d2
+      $ almostNever (jux rev)
+      $ slow 8
+      $ almostAlways (# slide 0.9)
+      $ sometimesBy 0.265 (
+          (|-| note "{[d6(3,2,2)]}%1.234").
+          (# hpf "812").
+          (# lpf (range 2823 18123 $ slow 24 $ sine)).
+          (# distort 2)
+        )
+      $ off 0.124 (
+          (# n (scale "yu" "{[g6(3,2,2)]}%1.234")).
+          (# attack (range 0.9 0.46472 $ slow 3$ sine)).
+          (# release 0.234)
+        )
+      $ off 0.25 (
+          (# n (scale "yu" "{[g6(6,2,2)]/2}%0.235")).
+          (# attack (range 0.4 0.46472 $ sine)).
+          (# release 0.34)
+        )
+      $ n (scale "yu" "{[d6(3,2,2)]}%1.234")
+        # s "superzow"
+        # decay "0.2 0.6 0.1"
+        # detune "{0.6 0.646 0.58239 0.6123 0.611231712}%2"
+        # leslie 0.25
+        |-| note "{[d6(3,2,2)]}%1.234"
+        # gain 0.88
+        # room  "0.42 0.4231 0.4561"
+        # size "{0.2 0.1 0.1}%2"
+        # attack (range 0.07 0.6472 $ slow 9 $ sine)
+        # release 0.034
+        # room "2"
+        # delay (1/3)
+
+
+
+        

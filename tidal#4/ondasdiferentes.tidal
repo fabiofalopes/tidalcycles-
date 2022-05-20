@@ -1,0 +1,132 @@
+setcps(140/60/4)
+
+s "breakmutante"
+s " baumbreaks"
+
+s "andrz"
+
+s "bassmntrb"
+
+s " timkahn"
+s " buchla"
+s "glitchonesretro "
+s " dbz"
+
+s "tablasome "
+s " etnicones"
+
+s " tribalrand"
+s "medivalrand "
+s "calimbado "
+
+s " segalchord"
+
+s " snrmntrb"
+s "hhmntrb"
+s "hhpsp"
+s "hhranho"
+s "ihaski"
+s "snrva"
+s " rimva"
+s "formanta "
+
+s " charliesnares"
+s " charliesnaps"
+s " charlieperc"
+s "charliekicks "
+s " charliehats"
+s " charliehhopen"
+s " charliecrash"
+s " charlieclaps"
+
+s "gripskick"
+s "gripspercs"
+s "gripsfx"
+s "gripssnares"
+s "grips808"
+s "gripsextra"
+s "gripshats"
+
+s "gabba"
+s "gabbaloud"
+s "gabbalouder"
+
+
+
+d1
+$ every 4 (
+    (# s "gabbalouder").
+    (# lpf 8033).
+    (# gain 0.9).
+    (|-| up 9).
+    (# release (rangex 919 12774 $ fast 2 $ sine)).
+    (# resonance "0.02 0.04512 0.012311 0.123")
+  )
+$ sometimesBy 0.6 (
+    (# s "gabba")
+  )
+$ n "{[0*4]}%1.25 {[0*3]}%2"
+  #s "gabbaloud"
+    |-| up 8
+    # release 0.6
+
+d2
+  $ stack [
+    degradeBy 0
+      $ n "0"
+        # s "charliekicks "
+        # gain 0.9
+    ,
+    degradeBy 0
+      $ n "{[~ 2@ ~ 2]}"
+        # s " charliesnares"
+        # gain 0.92
+    ,
+    degradeBy 0
+      $ n "{[~ 2@ ~ 2]}"
+        # s " charlieclaps"
+        # release 0.8
+        # gain 0.7
+    ,
+    degradeBy 0
+      $ n "{[ ~ ~ ~ ~ ~ ~ ~ 8]}"
+        # s " charliesnaps"
+        # gain 0.8
+    ,
+    degradeBy 0
+      $ n "{[~ ~ 5]}"
+        # s " charlieperc"
+        # gain 0.2
+    ,
+    degradeBy 0
+      $ n "0(8,16,2)"
+        # s " charliehats"
+        # gain 0.67
+    ,
+    degradeBy 0
+      $ slow 4
+      $ n "[~ ~ ~ 4]"
+        # s " charliehhopen"
+    -- ,
+    -- degradeBy 0
+    --   $ n "{[0 ~ 9]}%1.2"
+    --     # s " charliecrash"
+    --     # release 0.9
+  ]
+
+hush
+
+  d1
+    $ sometimesBy 0.25 (
+        (# n "e5'minor13  g5'min11  a5'minor11").
+        (# gain 0.7566).
+        (# hpf 242).
+        (# room 0.2)
+      )
+    $ n "c5'min7 f5'min9 g5'min"
+      # s "supersquare"
+      # release 0.7
+      # lpf (range 900 18481 $ slow 32 $ sine)
+
+  hush
+  

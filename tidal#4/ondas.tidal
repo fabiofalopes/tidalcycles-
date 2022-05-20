@@ -1,0 +1,21 @@
+setcps(80/60/4)
+
+
+
+do
+let chord1 = "<[c3'dim  , d3'dom9]>"
+let chord2 = "<[d4'dom9 g4'dom9 , b4'dim ]>"
+d1
+  $ stack [
+    degradeBy 0
+      $ off 0.25 (|+| note 3)
+      $ off 0.125 (|+| note 9)
+      $ off 0.025 (# n chord2)
+      -- $ stut 2 3 4
+      $ n chord1
+        # s "supersquare"
+        # release "0.5"
+        # voice "0.2"
+  ]
+
+  hush

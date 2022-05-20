@@ -1,0 +1,40 @@
+setcps(140/60/4)
+
+d1
+  $ every 2 (# pan rand)
+  $ every 4 (jux ((fast 0.25).(sometimesBy 0.8 rev)))
+  $ whenmod 2 5 (
+      (# swing 1 2).
+      (off 0.25 (|+| 7))
+    )
+  $ almostAlways (fast 0.5)
+  $ stack [
+    degradeBy 0
+      $ n "[1 9 1]"
+        # s "peri"
+    ,
+    degradeBy 0
+      $ sometimesBy 0.25 (
+          off 0.125 (|-| note 12).
+          (almostNever (fast 0.5)).
+          (|*| gain 0.2).
+          (every 8 (#irand 4)).
+          (every 6 (jux rev)).
+          (# release (range 0.05999 1.333 $ slow 9 $ sine))
+        )
+      $ every 3 (fast 0.25)
+      $ slow 128
+      $ n "<[0 0 0] [2 3]>"
+        # s "[tabla2:7 tabla:2]/5"
+        # cut "[0 2 5 7]"
+  ]
+  # cut "1"
+  # resonance "0.2 0.4 0.1 0.05 0.1 0.2 0.6"
+  # lpf (range 8391 17920 $ slow 6 $ square)
+  # room 0.099
+  # size 0.03
+
+d1 silence
+
+
+  hush

@@ -1,0 +1,64 @@
+setcps(140/60/4)
+
+
+
+d1
+  $ slow 8
+  $ almostAlways (jux rev)
+  $ stack [
+    degradeBy 0
+      $ sometimesBy 0.3 (# s "supersquare")
+      $ n (scale "yu" "< [0 3 6],[1 6 9 2 4 6]>")
+        # s "supersaw"
+        # release "0.5"
+        # voice (
+            (range 0.1 0.6 $ sine*rand)
+          )
+        # cutoff "8333"
+        # lpf (range 923 12939 $ slow 32 $ sine)
+        # resonance "0.2 0.05 0.075 0.025 0.1 0.05 0.001"
+      ,
+      degradeBy 0
+        $ almostNever (off 0.25 (|+| 3))
+        $ every 2 ((slow 0.25).(#attack (rangex 0.8 0.888 $ rand)))
+        $ n (scale "yu" "[5 9 2][2 3 4]")
+          # s "superpwm"
+      ,
+      degradeBy 0
+        $ every 2 (# accelerate " 0.002 0.001 ~ ~ ~ ~ ~ ~ ~ 0.2 ")
+        $ every 3 (
+            (off 0.5 (# s "jvbass").(|+| up 12).(# gain 0.6).(# attack "0.03 0.03 0.2 0.5 0.3"))
+          )
+        $ n (scale "yu" "<[12]*6,[6 8 2 8 12 10]>")
+          # s "superzow"
+          # decay "0.2 0.6"
+          # slide 0.9
+          # detune 0.6
+          # leslie 0.25
+  ]
+  -- # lpf 8000
+
+  d1 silence
+
+
+
+
+  d2
+    $ slow 0.5
+    $ (off 0.25 (|+| 12))
+    $ sometimesBy 0.5 (
+          (# s "segalchord:9 segalchord:3").
+          (# n (irand 2)).
+          (# attack " 0.2 0.2 0.1")
+        )
+    $ s "[segalchord:1 segalchord:6]"
+      # cut "1"
+      |+| up 3
+      # delay (1/12)
+      # rate 0.24
+      # room 0.9
+      # attack 0.9
+      # size 0.45
+      # release (range 0.05 0.9 $ rand)
+
+hush

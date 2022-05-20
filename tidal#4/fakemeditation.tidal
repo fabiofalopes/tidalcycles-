@@ -1,0 +1,50 @@
+setcps(85/60/4)
+
+
+d2
+  $ every 3 (striate 2)
+  $ stack [
+    degradeBy 0.15
+      $ almostAlways (|-| note 12)
+      $ off 0.125(
+          (# n "f5(12,3,9)").
+          (# gain 0.87).
+          (degradeBy 0.96)
+        )
+      $ off 0.2 (
+          (|+| up "19").
+          (# lpf (rangex 11838 678 $ slow 8 $ sine)).
+          (# gain 0.8).
+          (slow 4)
+        )
+      $ n "{[c4(3,1) d4(4,1,4)]}"
+        # s "tablasome"
+        |+| up 7
+    ,
+    degradeBy 0.6
+      $ often (
+          (jux rev).
+          (off 0.125 ((# s "gripspercs").
+            (#release 0.2).
+            (|+| note " 9 2 1 3 5 ").
+            (#gain 0.7).
+            (#hpf 823).
+            (#room 0.07)).
+            (degrade)
+            )
+        )
+      $ striate 3 $ n "0 3 4 5" # s "gripshats"
+        # release "0.25 0.15 0.12 0.12 0.11 0.1194 0.023"
+        # attack (range 0.04 0.124 $ sine)
+      ,
+    degradeBy 0.02
+      $ often (
+          (# n "[0*6 ,~ ~ 1, 4*12]").
+          (jux (|-| 3))
+        )
+      $ n "0*3"
+        # s "hhmntrb"
+        # gain 0.79
+  ]
+
+hush

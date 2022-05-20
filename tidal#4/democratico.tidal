@@ -1,0 +1,80 @@
+setcps(145/60/4)
+
+do
+let arpz1 = n (arpg "'yu {[d5 , a5 , d6]}")
+let arpg2 = n (arpg "'yu [d5(4,1) , a5(2,1) , d5(1,1)]")
+let arpg3 = n (arpg "'yu [d5 , a5, d5]")
+let arpz4 = n (arpg "'yu [d5 [g5 b6] , a5 [ ~  ~ ~ d6], d5 [a4 f7]]")
+
+
+
+hush
+
+d1
+  $ degradeBy 0.8
+  $ sometimesBy 0.1 (|-| note 12)
+  $ often (|+| note 7)
+  $ almostNever (|+| note 12)
+  $ sometimesBy 0.2 (|+| note 5)
+  -- $ off 0.25 (
+  --     (|+| note 12)
+  --   )
+  $ off 0.8 (
+      (|+| note 7).
+      (# gain (range 0.7 0.8 $ rand)).
+      (almostNever ((off 0.9 (|+| note 24)).(# attack (range 0.6 0.61 $ sine)))).
+      (# room 0.21).
+      (# size (range 0.01 0.12 $cosine))
+    )
+    $ off 0.5 (
+      (|+| note 4).
+      (#gain (range 0.75 0.85 $ slow 8 $ sine)).
+      (almostNever (jux rev))
+    )
+  $ arpg2
+    # s "superpiano"
+    # sustain 0.9
+    # velocity (range 0.97 0.4 $ slow 3 $ cosine)
+
+hush
+
+  d2
+    $ slow 16
+    $ degradeBy 0.1
+    $ off 0.3(
+        (|+| note 7)
+      )
+    $ off 0.6 (
+        (|+| note 12)
+      )
+    $ arpz4
+      # s "supervibe"
+      |-| note 12
+      |*| decay 0.6
+      # hpf "80"
+      # velocity (range 0.87 0.5 $ cosine)
+      # detune (rangex 1.6 7 $ slow 8 $ sine)
+      # lpf (range 940 15326 $ slow 32 $ sine )
+      # resonance (range 0.01 0.09219 $ rand)
+      # room "{0.02 0.08 0.09}%1.4"
+
+d2 silence
+
+d3
+  $ degradeBy 0.25
+  $ off 0.9 (
+      (|+| note 12)
+    )
+  $ arpz1
+    # s "superfm"
+    # voice (range 0.5 0.9 $ fast 2 $ sine)
+    # release 0.5
+    # sustain 12
+    # accelerate 0.001
+    # detune 12
+    # vowel "{a u}%2"
+
+
+d3 silence
+
+hush

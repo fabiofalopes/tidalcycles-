@@ -1,0 +1,88 @@
+setcps(80/60/4)
+
+hush
+
+do
+let cminish9 = "[c4(1,5)'min7 e4(2,3) g4(1,2)'min9]"
+let cminish9Up = "[c5(1,5)'min7 e5(1,3) g6(1,2)'min9]"
+let esharp8adjn = "[e4'sharp9(1,6,2) , a4(1,4) , b5'maj(1,6)]"
+d1
+  $ every 8 (
+      (# n (scale "yu" esharp8adjn)).
+      (degrade)
+    )
+  -- $ superimpose(
+  --     (# n cminish9Up).
+  --     (#room 0.025).
+  --     (# release 0.254).
+  --     (degrade)
+  --   )
+  $ off 0.125 (
+      (almostNever (|+| note 12)).
+      (every 4 (off 0.21 (|+| note 2)))
+    )
+  $ n (scale "yu" cminish9)
+    # s "superpiano"
+    # release (range 0.37 0.09749 $ rand)
+
+
+    hush
+
+
+
+
+d2
+  $ slow 4
+  $ off 0.125 (
+      (|+| note 4).
+      (degradeBy 0.6).
+      (# hpf (range 842 189 $ slow 4 $ cosine)).
+      (slow 0.964917).
+      (# room 0.26).
+      (# size 0.3)
+    )
+    $ off 0.5 (
+      (sometimesBy 0.7 (|+| up 12)).
+      (# distort 1.2).
+      (# hpf (range 123 747 $ cosine)).
+      (# gain (range 0.4 0.5 $ slow 8 $ sine)).
+      (jux rev).
+      (# room 0.4)
+    )
+  -- $ almostNever (off 0.8125 (|+| note 2))
+  -- $ often (
+  --     (off 0.75 (|+| up 9)).
+  --     (# release 0.68)
+  --   )
+  $ almostAlways  (
+      (superimpose (
+        (# s "supersaw").
+        (# gain 0.6).
+        (# gain 0.85).
+        (# hpf (range 971 1231 $ sine))
+        )).
+      (off 0.245 (|+| note 12))
+    )
+  -- $ off 0.25 (
+  --     (superimpose (# s "supersquare")).
+  --     (# release 0.25).
+  --     (often (jux rev))
+  --   )
+  -- $ almostNever (
+  --     (iter 4)
+  --   )
+  $ n "[{d5(1,2) b5(2,3) a5(1,3) c6(1,3)@}%8]"
+    # s "superfm"
+    # voice "0*11 12"
+    -- # sustain 0.67
+    # vowel "{a u}%2"
+    |-| note 12
+    # resonance "0.6 0.348"
+    # lpf (range 202 2389 $ slow 12 $ sine )
+    # hpf "34"
+    # room 0.12
+    # size 0.9
+    -- # n (irand 3)
+    -- # delay 16
+
+    hush

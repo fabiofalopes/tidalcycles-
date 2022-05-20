@@ -1,0 +1,81 @@
+setcps(140/60/4)
+
+d1
+  $ slow 6
+  -- $ someCyclesBy 0.25 (
+  --     (off 0.95 (
+  --         (|-| n 7).
+  --         (# leslie 0.2).
+  --         (# vowel "{[a a e i o , ~ ~ u ~ ]}%1.25").
+  --         (# gain 0.9)
+  --     ))
+  --   )
+  $ stack [
+    degradeBy 0
+      $ n (scale "yu" "{[0 2 3 5]}%1.25")
+        # s "superfm"
+        # release (range 0.2 0.44 $ sine)
+    ,
+    degradeBy 0
+      $ n (scale "yu" "{[ 10 8 4 6 8 ]}%0.65")
+        # s "superfm"
+        # lpf (range 281 8688 $ slow 4 $ sine)
+        # hpf "102"
+        |-| n 12
+        # release (range 0.2 0.345 $ fast 2 $ sine)
+    ,
+    degradeBy 0
+      $ jux (
+          (off 0.125 (|-| n 7)).
+          (# gain 0.8).
+          (someCycles (superimpose ((# s "glitch:4").(|-| up 12).(#cut "1").(#attack (range 0.1 0.3 $ slow 4 $ sine)).(every 3 degrade).(#room (range 0.02 0.1 $ rand)).(#gain 0.78))))
+        )
+      $ off 0.25 (
+          (|*| up 2).
+          (every 8 (|+| n 7)).
+          (every 3 (|*| n 2)).
+          (degrade )
+        )
+      $ n (scale "yu" "{[8 2 4]}")
+        # s "superfm"
+        # vowel "{[a u a i u]}%1.5"
+        # voice (range 0.000299 0.00223 $ slow 3$ cosine )
+        # hpf "{[123 212 164 129 204]}%0.25"
+        # leslie 0.254
+        # release (range 0.02 0.6 $ slow 6 $ rand)
+  ]
+  # lpf (range 999 12382 $ slow 32 $ sine)
+  # resonance (range 0.012 0.2012 $ slow 4 $ sine*rand)
+  # room (range 0.12 0.18248 $ slow 7 $ rand)
+  # size (range 0.01 0.2719 $ rand)
+  # hpf "80"
+
+  d2
+    $ slow 4
+    $ stack [
+      degradeBy 0
+        $ n (scale "yu" "{[5 7 8]}%1.3")
+          # s "buchla:4"
+          # lpf 2345
+      ,
+      degradeBy 0
+        $ n (scale "yu" "{[1 2]}%0.76")
+          # s "buchla"
+          # lpf "{1245 2445}%12"
+          # voice "{[0.2 0.5 0.7]}"
+    ]
+    # lpf (range 28 12988 $fast 2 $sine*rand)
+
+
+d3
+  $ every 4 (degrade )
+  $ sometimesBy 0.2 (# s "{[charliehats*6 , charliehhopen:1]}")
+  $ sometimesBy 0.15 (# n (irand 12))
+  $ almostNever (fast 0.5)
+  $ almostNever (jux ((fast 2).(#s"charliehats:6")))
+  $ s "{[charliehats:4*6 ]}"
+    # cut "2"
+    |-| up 3
+    # gain 0.87
+
+hush

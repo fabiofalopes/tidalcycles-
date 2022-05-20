@@ -1,0 +1,121 @@
+setcps(125/60/4)
+
+do
+let seq1 = "<[0 3 6][9 2 3][1 2 4]>"
+let seq2 = "[0 9 0]*6"
+let seq3 = "[4(2,1) 0(2,1) 1(2,1)]"
+d1
+  $ slow 1.5
+  $ degradeBy 0.2
+  $ whenmod 2 4 (# swing 2 3)
+  $ almostNever (# delay (1/16))
+  $ almostNever (
+      (# n (scale "yu" seq3)).
+      (often (jux rev)).
+      (# hpf "739")
+    )
+  $ sometimesBy 0.65 (
+      (# release (range 0.04 0.26 $ fast 2 $ sine ))
+    )
+  $ every 4 (
+      (off 0.25 ((# n (scale "yu" seq2))).
+      ( #attack 0.95).
+      (# s "supersaw").
+      (# release 0.09)).
+      (often rev).
+      (# release 0.6).
+      (# lpf 8309)
+    )
+  $ n (scale "yu" seq3)
+    # s "superpwm"
+    # release 0.44
+    # lpf (range 200 8483 $ slow 64 $ sine)
+    # resonance (range 0.01 0.028 $ fast 2 $ rand)
+    |+| distort 0.2
+    |*| attack 0.6
+    # gain (range 0.82 0.4 $ sine)
+
+
+d2 silence
+
+do
+let seq1 = "<[0 3 6][9 2 3][1 2 4]>"
+let seq2 = "[0 9 0]*6"
+let seq3 = "[4(2,1) 0(2,1) 1(2,1)]"
+d2
+  -- $ fast 4
+  $ slow 4
+  $ off 0.125 (
+      (|+| 3).
+      (often (off 0.25 (|+| 5))).
+      (almostAlways (off 0.25 (|+| 4))).
+      (# gain 0.68).
+      (# room "0.25 0.256 0.265 0.2478 0.256 0.26 0.27").
+      (# size "0.24 0.25 0.24 0.23 0.23 0.2346 0.225")
+    )
+  $ n (scale "yu" seq1)
+    # s "supersquare"
+    # release 0.12
+    -- # voice "0.25 0.26 0.16 "
+    # voice (range 0.6 0.7 $rand)
+    # lpf (rangex 129 11440 $ slow 32 $ saw) -----------------------------------------
+    # resonance "0.02 0.04 0.02 0.02 0.02 0.01 0.024 0.06 0.08 0.09"
+    # room 0.1
+    # size 0.12
+    # hpf "80"
+
+d2 silence
+
+d2
+  $ stut 2 0.5 0.28
+  -- $ stutWith 4 (1/6) (|* speed "0.9")
+  $ off 0.125 (
+      (|+ 3).
+      (# attack (range 0.3 0.332 $ slow 2 $ sine)).
+      (# cut "1").
+      (# room 0.12)
+    )
+  $ every 1 ( ----------------------------------------------------
+      (off 0.25 (|+| 3)).
+      (off 0.75 ((|+| note 7)).(# attack 0.4))
+    )
+  $ n "[2]*8"
+    # s "dx7so"
+    |-| note 1
+    |+| up (scale "yu" "14 12 14 16 18 20 12 17")
+    # release 0.24
+    # gain 0.91
+    # lpf (range 391 4231 $ slow 24 $ sine)    -------------------------------------------------------------
+    # resonance (range 0.02 0.09 $ rand)
+
+d4
+  $ slow 16
+  $ n "3"
+    # s "dx7so"
+    |+| note 5
+    |+| room 0.95
+    # size 0.9
+    # gain 0.71
+
+d5
+  $ often (# delay 0.125 )
+  $ often (jux rev)
+  $ n "55*6"
+    # s "dx7so"
+    |+| up (scale "yu" "[0 3 5 2 5 6]")
+    |-| note 7
+    # release 0.2
+    # hpf 9353
+    # room 0.77
+    # size 0.2
+
+
+d3 silence
+
+d6
+  $ s ""
+
+
+d5 silence
+
+hush

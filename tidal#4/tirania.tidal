@@ -1,0 +1,132 @@
+setcps(140/60/4)
+
+
+hush
+
+d1
+  $ almostNever (# n (irand 16))
+  $ almostNever (
+      (# s "{[gabba(3,16) , ~ gabba:9(1,3)]}%1.25")
+    )
+  $ every 3 (
+      (# s "{[gabba(1,16) , ~ gabba:9(1,6)]}%1.25").
+      (# attack (range 0.02 0.00004 $ sine)).
+      (# gain 0.8)
+    )
+  $ almostAlways (
+      (|-| note 12).
+      (# gain 0.85)
+    )
+  $ s "{[gabba(6,16) , ~ gabba:9(1,6)]}%1.125"
+    # release (range 0.2568 0.12381 $ rand)
+    |-| note 12
+
+  d2
+    $ almostNever (
+        (# n (irand 4)).
+        (# gain 0.8)
+      )
+    $ s "[gripskicks:4(3,16)]"
+      # release 0.4
+      # gain 0.65
+
+
+d2
+  $ every 4 (# gain 0.85)
+  $ off 0.125 (
+      (|+| note 9).
+      (# release 0.25).
+      (|+| room 0.015)
+    )
+  $ every 14 (
+      (#release (range 0.01001 0.014 $ slow 6 $ rand )).
+      (off 0.25 (#attack 0.1 )).
+      (off 0.8 ((|+| delay (1/3)).(#rate 0.54).(# attack 0.9).(# release 0.1)))
+    )
+  $ slow 1.5
+  $ s "gripskick:13(3,2,6) gripskick:13(3,1) gripskick:13(1,3)"
+    |-| note 8
+    # begin 0.05
+    # end 0.2
+    # gain 0
+
+
+hush
+
+d3
+  $ jux rev
+  $ every 3 (
+      (# s "{[gripshats:6(6,8), ~ ~ ~ gripshats:0]}")
+    )
+  $ every 4 (
+      (# s "gripshats:6(12,12)").
+      (# attack 0.01).
+      (# room 0.014).
+      (# size 0.35).
+      (# delay (1/3))
+    )
+  $ almostAlways (
+      (# release (range 0.0001 0.012141 $ slow 4 $ sine))
+    )
+  $ s "gripshats:6(12,8)"
+    # gain 0.43
+    # release 0.2
+    # crush 8
+    |-| note 2
+    # pan (rand)
+
+
+d1
+  $ degradeBy 0
+  $ stack [
+    degradeBy 0.1699
+      $ slow 2
+      $ off 0.1249538 (
+          (|+| note 12).
+          (#attack (range 0.8 0.8324 $ slow 2 $saw)).
+          (off 0.25 (
+                (|+| s "[medivalrand:9 , medivalrand:8(3,1)]").
+                (# attack (range 0.02 0.243 $ sine)).
+                (# release 0.2)
+              )
+            )
+        )
+      $ off 0.912 (
+          (|*| note 24 ).
+          (#attack (range 0.2 0.8324 $ slow 8 $saw)).
+          (degradeBy 0.5)
+        )
+      $ n "0"
+        # s "tribalrand"
+        |*| release 0.7
+    ,
+    degradeBy 0
+      $ every 2 (
+          (|-| note 5).
+          (|*| release 0.8).
+          (# gain 0.8).
+          (# hpf "123 145")
+        )
+      $ n " ~  ~ 9 ~"
+        # s "tribalrand"
+    ,
+    degradeBy 0
+      $ n "~ 15"
+        # s "tribalrand"
+        # begin 0.2
+        # crush 11
+        # distort 0.05
+    ,
+    degradeBy 0.85
+      $ slow 3
+      $ n "[12 15 18 , 22 44]"
+        # s "tribalrand"
+        # gain 0.85
+        # room 0.09
+        # size 0.12
+        |-| note 12
+        |*| release 0.6
+  ]
+
+
+hush

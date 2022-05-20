@@ -1,0 +1,76 @@
+setcps(140/60/4)
+
+do
+let val1 = "0 0.2 0.3 [0.6 0.78 0.7]/6 "
+d1
+$ almostAlways (#attack val1)
+$ almostNever (
+    (|-| note 12).
+    (# lpf (rangex 808 13122 $ slow 32 $ sine)).
+    (# leslie 16 ).
+    (# gain "0.85 0.7995 0.821").
+    (#room 0.24).
+    (#size 12)
+  )
+$ every 12(
+    (|+| speed 0.79).
+    (# cutoff (range 8290 12000 $ fast 2 $cosine)).
+    (#delay (1/3)).(# rate 16)
+  )
+$ every 16 (
+    (# s "segalchord:123").
+    (# speed 0.4).
+    (# attack (range 0.6 0.9 $ rand)).
+    (# release 0.5)
+  )
+$ s "[segalchord:55, ~ ~ segalchord:56]"
+# cut "1"
+# gain 1.2
+# lpf (range 800 14821 $ slow 32 $ sine)
+# room 2
+
+-- ----------------
+---------
+
+
+do
+let pattern1 = "[0 0 0]"
+let pattern2 = "[0*3]"
+let pattern3 = "[~ ~ 9].[~ ~ ~ ~ ~ 2]"
+let pattern4 = (scale "yu" "[3 3 3][ 4 4 4]")
+d2
+  $ degradeBy 0.93
+  $ slow 1.125
+  $ every 8 (# velocity (0.9*rand))
+  $ stack [
+    n pattern1
+      # s "gripskick"
+    ,
+    n pattern2
+      # s "gripshats"
+      # gain 0.6
+    ,
+    n pattern3
+     # s "gripspercs"
+    ,
+    n pattern4
+      # s "hhranho"
+      # gain 0.6
+  ]
+  # distort 0.1
+  # crush 12
+  # tremdp 0.25 # tremr (1/16)
+  # gain 0.85
+-- -------------------------------------
+
+do
+let pattern5 = "[~ 0 ~ ~ 2]/2"
+d4
+  $ n pattern5
+    # s "jv1080"
+    # lpf (range 800 11348 $ slow 32 $ sine )
+    # resonance "0.01 0.02 0.06 0.09 0.097 0.0645 0.1 "
+    # room "0.1 0.11 0.93"
+    # size " 0.1 0.2 0.4 0.1 "
+
+hush

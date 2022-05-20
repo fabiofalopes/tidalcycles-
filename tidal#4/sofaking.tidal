@@ -1,0 +1,41 @@
+setcps(140/60/4)
+
+d1
+  $ off 0.5 (
+      (# s "jvbass").
+      (|-| note 3).
+      (sometimesBy 0.2 ((# s "leadbassmntrb:5").(|-| note 5)))
+    )
+  $ off 0.25 (|+| 3 )
+  $ off 0.125 (
+        (|+| 12).
+        (# attack 0.9)
+      )
+  $ stack [
+    degradeBy 0.96
+      $ almostAlways (
+          (# attack (range 0.5 0.555 $ slow 4 $ sine )).
+          (# lfo "8392 8112 11239 13123 18233").
+          (# resonance "0.02 0.03 0.06 0.1 0.1 0.02 0.04 0.02 0.11 0.12 0.53")
+        )
+      $ n "<[c3'min d3'dom11  f2'minor6]>"
+        # s "superpwm"
+        # cut "1"
+    ,
+    degradeBy 0.95
+      $ sometimesBy 0.75 (
+          (# n "<[c4'min d4 f3]*2>").
+          (off 0.5 (# n (scale "minorSharp5" "[9 2]"))).
+          (sometimesBy 0.2 (# attack (range 0.02 0.2 $ slow 3 $ sine)))
+        )
+      $ often (
+          (# attack (range 0.2 0.2424 $ slow 4 $ sine ))
+        )
+      $ n "<[c4'min d4'dom11 f3'minor6]*2>"
+        # s " superpwm"
+        # release 0.5
+  ]
+  # resonance "0.1 0.07 0.1 0.02 0.12 0.04 "
+  # cutoff (
+      (range 930 18912 $ slow 32 $ sine)
+    )

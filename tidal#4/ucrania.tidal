@@ -1,0 +1,54 @@
+setcps(140/60/4)
+
+d1
+    $ slow 8
+    $ whenmod 8 1 (
+          (jux rev).
+          (#s"tabla").
+          (jux ( # s "metal")).
+          (off 0.12 (#s"909")).
+          (#cut "5").
+          (# room (rangex 0.01 0.18 $ rand))
+        )
+    $ every 3 (
+        (#distort 12).
+        (#gain 0.89).
+        (almostNever (jux rev)).
+        (# hpf (range 900 12832 $ cosine)).
+        (#resonance (rangex 0.01 0.25 $ slow 8 $ sine))
+      )
+    $ n "[d3(2,3) c4(3,1) b3(3?,1) e4(2?,1)]"
+    # s "909"
+    # cut "1"
+    # release 0.2
+
+d2
+    $ slow 6
+    $ almostAlways (#attack (rangex 0.2 0.4 $sine))
+    $ sometimesBy 0.2 (
+        (#s"glitch:3").
+        (# cut "2").
+        (every 3 (# n (irand 12)))
+      )
+    $ whenmod 2 5 (|+| note 3)
+    $ off 0.25 (|-| 12)
+    $ off 0.125 (|-| 2)
+    $ off 0.5 (|+| 24)
+    $ n "0(1,4) 4(4,5) 7(6?,1)" # s "metal" |-| note 24
+
+d3
+  $ fast 0.25
+  $ stack [
+    sometimesBy 0.9 (# s "sundance sundance:5 sundance:3")
+    $ n "2*3"
+      # s "sid"
+      # cut "3"
+  ]
+  # gain 0.8
+  # lpf (range 990 4919 $ slow 12 $ sine)
+  # hpf 800
+  # distort (range 0.1 0.14 $ rand)
+
+d2 silence
+
+hush

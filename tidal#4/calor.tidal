@@ -1,0 +1,42 @@
+setcps(140/60/4)
+
+d1
+  $ slow 1
+  $ almostAlways (slow 1.25)
+  $ every 8 (
+      degradeBy 0.25.
+      whenmod 12 9 (# swing 2 4)
+    )
+  $ every 6 (
+      sometimesBy 0.25 (|-| 12)
+    )
+  $ every 12 (
+      rarely (off 0.25 (|+| 3)).
+      almostNever (off 0.125 (|-| 5)).
+      degrade
+    )
+  $ stack [
+    every 12 (jux rev )
+    $ almostAlways (# n (irand 4))
+    $ s "[dork2(1,2) , chin:2*6]"
+      # release 0.243
+      # gain 0.0 -------------------------------------
+      |-| note 12
+    ,
+    n "[0 0]@2" # s "[future*6]" # gain 0.7 # cut "4"
+    # release (range 0.1 0.23 $rand)
+    # gain 0.9
+    |-| note 4
+    ,
+    n (arpg "'yu [0(2,3),2(2,4),5]")
+      # s "f:5 f:9"
+      # cut "1"
+      # release (range 0.01 0.03 $saw)
+      # gain 0.7
+      |-| note 25
+      -- # lpf 2323
+      # lpf (range 945 12328 $ slow 32 $ sine)
+      # resonance "0.02 0.04 0.05 0.03 0.01 0.045 0.06"
+    ,
+    n "~ ~ 1" # s "fellfx" # release 0.2 |-| note 24 # gain 0.8
+  ] # distort 2

@@ -1,0 +1,114 @@
+setcps(140/60/4)
+
+d1
+  $ slow 16
+  $ off 0.75 (
+      (|+| up 7).
+      (#hpf 266).
+      (#lpf 1235).
+      (often (# attack (range 0.01 0.212 $ fast 2 $ rand))).
+      (# begin (range 0.02 0.7 $ sine*rand)).
+      (#cutoff (range 12212 80 $ cosine ))
+    )
+  $ jux (
+      (every 4 (
+          off 0.5 (|+| up 7).
+          (sometimesBy 0.25 (#attack (range 0.02 0.2 $ fast 0.125 $ sine)))
+      )).
+      (# gain 0.8).
+      (#lpf (range 812 1123 $ slow 24 $ sine)).
+      (#resonance "{[0.02 0.01 0.24 0.06534 0.2342 0.08283 0.123]}%2").
+      (# hpf 495).
+      (#room "{[0.1 0.123 0.123545 0.1532 0.162 0.123 0.232]}%12").
+      (#size "{[0.2 0.2 0.5 0.8]}%0.2")
+    )
+  $ off 0.125 (
+      (|+| up 5).
+      (# gain 0.785).
+      (|-| speed 0.75).
+      (# lpf (range 222 3128 $ slow 23 $ sine))
+    )
+  $ off 0.25 (
+      (sometimesBy 0.25 (|+| up 2)).
+      (|-| up "<12 7 12>").
+      (# begin (range 0.1 0.7 $ fast 8 $ rand)).
+      (# end 1).
+      (|-| up 5).
+      (# hpf "123")
+    )
+  $ n "{[0 2 5 6 , ~ 8 ~ ~ 12]}%1.125"
+    # s "arpy:8"
+    |-| up 5
+    # vowel "{[a e i o u]}%1.25"
+    # voice "{[0.2 , 0.4 0.9]}1.1249274789123"
+
+d2 silence
+
+d2
+  $ slow 3
+  $ stut 2 0.25 6
+  $ off 0.125 (
+      (# n (irand 12)).
+      (|+| up (scale "yu" "{[0 5 7 10 1]}%0.25")).
+      (degrade).
+      (#gain 0.78)
+    )
+  $ often (
+      (# n (range 66 99 $ rand)).
+      (# s "etnicones").
+      (# release (range 0.2 0.9 $ sine)).
+      (|+| up (scale "yu" "{[0 5 7 10 1]}"))
+    )
+  $ s "{[etnicones:7 , ~ etnicones:9 , ~ ~ ~ etnicones:12 ~]}"
+    |-| up (scale "yu" "{[0 5 7 10 1]}")
+    # release (range 0.85 0.95 $ slow 4 $ sine)
+
+hush
+
+d3
+  $ slow 2
+  $ stack [
+    degradeBy 0
+      $ s "{[gripskick:1(4,1),gripshats:4(6,16, 6 )]}"
+        # begin 0.14
+        # end 0.33
+        # lpf 1989
+        # distort 0.1
+        # release  "0.2"
+    ,
+    degradeBy 0
+      $ s "{[gripspercs:12(6,1) , gripspercs:17(3,2,1)]}"
+        # release 0.25
+  ]
+
+d4
+  $ every 6 (
+      (degradeBy 0.25)
+    )
+  $ off 0.125 (
+      (# vowel "{[u a u]}%5").
+      (# release "0.5").
+      (degradeBy 0.2)
+    )
+  $ s "gabba:0(6,16,5)"
+  # gain 0.85
+  |-| up 2
+
+d5
+  $ off 0.25 (
+      (superimpose (
+          (# s "{[medivalrand , ~ ~ medivalrand:4, ~ medivalrand:1?@q ~ ~ ~ ]}").
+          (|-| up "{[10 -2 3 ]}%1.5").
+          (#hpf 80)
+        ))
+    )
+  $ jux (
+      (|+| up 7).
+      (#hpf 666).
+      (often rev)
+    )
+  $ s "{[tribalrand:3(4,1), ~ ~ tribalrand:9 ~ ]}"
+  |-| up 2
+
+
+hush

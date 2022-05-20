@@ -1,0 +1,54 @@
+setcps(145/60/4)
+
+d1
+  $ every 2 (
+      (off 0.125 (|+| up 7)).
+      (degradeBy 0.2).
+      (# leslie 0.8).
+      (# swing 3 1).
+      (|-| up 12).
+      (# hpf "333").
+      (# release "0.48")
+    )
+  $ almostAlways (
+      (# s "etnicones(3,3,1)").
+      (almostNever (off 0.125 ((# attack (range 0.8 0.87645 $ slow 3 $ cosine )).(# hpf "1232").(|*| up "{[2 4?@q 5? , ~ 7 ~ ~ ~ ]}%0.75"))))
+    )
+  $ n "{[0 1 ~ 3 4 5 6 ,  ~  ~ ~~  ~ 12 13 ]}"
+    # s "etnicones(3,1,2) etnicones:22(1,1,3)"
+    # up (scale "yu" "<{[0 2 ~ 6? 7, 1? 6@]} {[2 4?@q 5, 2]}>")
+    # release (range 0.2 0.311 $ fast 2$ sine)
+    # swing 12 1
+
+hush
+
+
+
+d2
+  $ stack [
+    degradeBy 0.9
+      $ n "{[ ~  0]}"
+        # s "gripspercs"
+    ,
+    degradeBy 0.2
+      $ n "{[1(6,3,1)]}0.75"
+        # s "gripshats"
+        # up "{[0 0 0 2 3 5 19 12]}%1.125"
+    ,
+    degradeBy 0.1
+      $ n "{[5]}"
+        # s "charlieperc"
+        |-| up "<32 37 35>"
+        # cut "1"
+  ]
+
+
+
+d3
+  $ s "dx7so"
+    # cut "1"
+    |+| up "{[12 12 12 15 18 , 0  3 5 7 10]}"
+
+
+
+hush

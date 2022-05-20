@@ -1,0 +1,40 @@
+setcps(140/60/4)
+
+hush
+
+
+do
+let tribal1 = "tribalrand:4 tribalrand:6"
+let tribal2 = "tribalrand:4 tribalrand:8"
+let tribal3 = "[tribalrand:14 , tribalrand:12]"
+let tribal4 = "tribalrand:28*4"
+let tribal5 = "tribalrand:5*16"
+d2
+  $ slow 3
+  $ degradeBy 0.234
+  $ every 8 (
+      (slow 4)
+    )
+  $ every 3 (
+      (off 0.25 (|-| s "medivalrand:8")).
+      (# attack (range 0.2 0.22 rand)).
+      (# gain 0.8).
+      (# release 0.35)
+    )
+  $ stack [
+      degradeBy 0.95
+        $ slow 0.85
+        $ s tribal4
+          # release 0.5
+      ,
+      degradeBy 0.25
+        $ slow 4
+        $ s tribal5
+          # release 0.4
+      ,
+      s tribal3
+      ,
+      s tribal1 # gain 0.6
+    ]
+    # lpf (range 801 12731 $ slow 32 $ sine)
+    # gain (range 0.834 0.9512 $rand)

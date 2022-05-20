@@ -1,0 +1,30 @@
+setcps(125/60/4)
+
+do
+let sons1 = "[baumbreaks:66 , baumbreaks:22, ~ ~ baumbreaks:9 ~ ]"
+let sons2 = "[baumbreaks:6 , baumbreaks:9, ~ ~ baumbreaks:9 ~ ]"
+d1
+  $ sometimesBy 0.00001 (
+        (stutWith 4 (1/6) (|+| note 0.25)).
+        (# s "breakmutante").
+        (# release 0.12)
+      )
+  $ sometimesBy 0.01 (
+      (# n (irand 12)).
+      (slow 0.99)
+    )
+  $ striateBy 8 (1/16)
+    $ s sons2
+      # release (range 0.05 0.09 $ slow 4 $ sine)
+      |-| up 12
+
+d2
+  $ striateBy 4 (1/6) $ s "prussrec145:2"
+    # begin 0.6
+    # release 0.5
+    |-| note 12
+
+d2 silence
+
+
+hush

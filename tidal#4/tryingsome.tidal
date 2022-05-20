@@ -1,0 +1,54 @@
+setcps(135/60/4)
+
+hush
+
+d1
+  $ off 0.8 (
+      (# n "[c4(6,1)]").
+      (|+| up 12).
+      (# attack 0.2).
+      (off 0.5 (# s "supersquare")).
+      (# gain 0.77)
+    )
+  $ whenmod 2 4 (|+| up 3)
+  $ off 0.25 (
+      (|+| 12).
+      (# attack 0.2).
+      (almostNever (off 0.125 ((# s "supersquare").(# voice "0.01 0.2 0.54"))))
+    )
+  $ n "[c4(6,1), d5(2,1) g5(3,1) d5(1,2)]"
+    # s "supersaw"
+    # release (range 0.01 0.2 $ sine)
+    # lpf (range 245 12841 $ slow 32 $ sine)
+    # resonance (range 0.01 0.0746 $saw)
+
+d2
+  $ sometimesBy 0.1 ((|-| up 12).(|-| up 5).(#attack 0.1))
+  -- $ slow 16
+  $ off 0.25 (|+| note 19)
+  $ off 0.42 (|+| note 15)
+  $ off 0.6 (|+| note 24)
+  $ every 8 ( stutWith 3 (1/2) (
+      (# vowel "[a e i o u]").
+      (# resonance (range 0.01 0.27 $ cosine)).
+      (# lpf "12992").
+      (almostNever (# attack (range 0.4 0.42235 $ slow 4 $ rand))).
+      (# gain 0.6)
+    )
+  )
+  $ n "[c4(12,1),d5(3,1)]"
+    # s "supersquare"
+    # release 0.6
+    # lpf (range 183 839 $ slow 48 $ sine)
+    # resonance (range 0.1 0.25 $ slow 4 $ sine )
+    # voice "<[0.2 0.24]>"
+    # release 0.2
+    # room 0.2
+    -- # delay (1/3)
+    # rate 12
+    |-| note 12
+
+
+
+
+    hush
