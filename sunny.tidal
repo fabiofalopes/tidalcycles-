@@ -1,0 +1,41 @@
+setcps(145/60/4)
+
+do
+let notes1 = "{[c4]}"
+let notes2 = "{[c5 b5 e5 , b6 e@6 d6 fb6]}"
+let notes3 = "{[c4 ~ ~ ~  ~ , ~ e4 ~ ~]}%0.25"
+let notes4 = "{[2 3 , 7 9 0]}%0.75"
+let notes5 = "{[3 ~ ~ ~ ~, ~ ~  1 ]}"
+d1
+    $ somecyclesBy 0.25 (|-| n 5)
+    $ n (scale "ritusen" notes2)
+        # s "superpiano"
+        |-| n 7
+        # velocity "{[0.8 0.5 , 0.5 0.1 0.3 0.8 0.4 0.5]}%1.2"
+        # sustain "0.2 0.43 0.4 0.12"
+d2 
+    $ swingBy (0.25) 4
+    $ n (scale "yu" notes3)
+        # s "superpiano"
+d3 
+    $ n (scale "yu " notes4)
+        # s "superpiano"
+        # detune 1
+d4 
+    $ stack [
+        degradeBy 0.9
+            $ n (scale "ritusen" notes5)
+                # s "superpiano"
+                |-| n 5
+                # velocity "{[0.8]}%1.2"
+                # sustain "0.2 0.43 0.4 0.12"
+        ,
+        degradeBy 0.7
+            $ n (scale "ritusen" notes2)
+                # s "superpiano"
+                |-| n 3
+                # velocity "{[0.8]}%1.5"
+                # sustain "0.3"
+        ]
+
+hush
