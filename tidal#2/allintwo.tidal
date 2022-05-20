@@ -1,0 +1,37 @@
+setcps (155/60/4)
+
+
+d1
+  $stack[
+    n "3 3? 2 ~" # s "super808" # rate 0.5 #voice 1,
+    degradeBy 0.9 $ sometimesBy 0.3 (#n (irand 4)) $ n "6 6 6 ~" # s "superhat" # accelerate 2 # release 0.1,
+    -- swingBy (0.25) 14 $ degradeBy 0.9 $ n "7*16" # s "soshats" #resonance 0.5 #pitch1 1 #sustain 0.5 #freq 1500,
+    n "~ 0 " # s "supersnare",
+    degradeBy 0.8 $ swingBy (0.25) 6 $ n (arpg "'major7 [-12,-14,-7,-11]") # s "superhex" #rate 0.1 #accelerate 0.005 # release 0.2 # gain 0.7,
+    degradeBy 0.6 $ n "0 0 0 0 0 0" # s "sostoms" #voice 1 #sustain 0.1,
+    degradeBy 0.3 $ n "[12 12 12] [13 ~ ~ 14 15]" # s "sostoms" #voice 1 #sustain 0.6
+    ]
+
+
+hush
+
+-- $ s "superhex" #rate #accelerate
+--
+-- $ s "superkick" #n #accelerate #pitch1 #decay
+-- 	--n: controls the kick frequency in a nonstandard way
+--
+-- $ s "super808" #n # rate #voice
+--
+-- $ s "superhat" #n # accelerate
+--
+-- $ s "supersnare" # n # decay # accelarate
+--
+-- $ s "superclap" #n #delay #rate #pitch1
+--
+-- $ s "soskick" #midinote #pitch1 #voice #pitch2 #speed #freq
+--
+-- $ s "soshats" #resonance #pitch1 #sustain #freq
+--
+-- $ s "sostoms" #voice #sustain #freq
+--
+-- $ s "sossnare" #voice #semitone #pitch1 #resonance #freq

@@ -1,0 +1,33 @@
+setcps (150/120/2)
+
+
+d1
+  $ every 2 (# crush 9)
+  $ every 8 (const $ striate 8 $ s "breakmutante" # gain 1.2)
+  $ every 16 (# n (irand 16))
+  $ every 8 (# n (irand 4))
+  $ every 8 (jux(rev))
+  $ sometimesBy 0.3 (# squiz 0.8)
+  $ sometimesBy 0.1 (# crush 8)
+  $ splice 4 "{0 ~ ~ 2?, 8 ~ ~ 8?, ~ 14? ~ 15}"
+  $ s "breakmutante" # gain 0.7 # cutoff (18000/sine*rand) # resonance "0.1 0.2" # room 0.05 # size 0.2
+
+
+d2
+      $ sometimesBy 0.5 (#crush 8)
+      $ every 4 (slow 2)
+      $ stack [
+        -- degradeBy 0.1 $ n "6*16" # sound "diabloperc" # speed 6 # gain 0.6,
+        every 2 (slow 2) $ n "{0 0 . 1 1 . 3 3 . 6 2 , 22 11 . 44 33 . 31 13 . 12 44}" # sound "hhmntrb" # release (saw - 0.5)
+        ]
+
+
+d3
+  $ every 8 (# n (irand 16))
+  $ every 4 (# n (irand 4))
+  $ n "[6 6 ] [7 9 2]. 6? ~" # sound "dr55" # lpf (sine * 800) # gain 1.2
+
+  d3 silence
+
+
+hush

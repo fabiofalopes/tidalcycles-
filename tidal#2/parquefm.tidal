@@ -1,0 +1,16 @@
+setcps (140/60/4)
+
+d1
+$ sometimesBy 0.5 (jux(rev))
+$ swingBy (0.25) 12
+$ struct (iter 4 "t(5,8)")
+$ off 0.1 (|- 7)
+$ off 0.4 (|+ 12)
+$stack[
+  n (arp "<down>" "<b'2dim'3> <a'sus4 e'5flat9> ")  # s "superfm" # velocity sine*rand,
+  n (arp "<up downup>" "b'4dim'7 a'3sus4") # s "superpiano" #velocity (0.9*rand),
+  degradeBy 0.2 $ fast 0.25 $ n (arp "<disconverge>" "<b'2dim'3> <a'sus4 e'5flat9>") # s "supermandolin" #velocity (rand) #gain 0.5 ,
+  n (arp "<converge>" "<b'2dim'3> <a'sus4 e'5flat9>") # s "supervibe"
+  ]
+
+hush

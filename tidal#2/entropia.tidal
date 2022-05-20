@@ -1,0 +1,31 @@
+setcps (70/60/4)
+
+d1
+$ every 4 (#delay 0.1)
+$ sometimesBy 0.4 (# room 0.5 )
+$ every 4 (#speed 2)
+$ every 2 (jux (rev))
+$ every 2 (slow 2)
+$ sometimesBy 0.6 (density 2)
+$ sometimesBy 0.2 (# speed 0.5)
+$ every 4 (const $ n "c4 c3 d4 g4 d3 a4 " # sound "supermandolin")
+$ stack [
+  n "c3 c2 d3 g3 d2 a3 " #sound "supermandolin" # release "0.1 1.5" # pan (sine / rand ) # rate "0.5 0.6 1.5 1.6" #cutoff (sine/rand*15222),
+  slow 2 $ striate 1 $ n "[c3 e3 a3?] [b3@q c3 g3 ~]" #sound "supersaw" # gain 0.4 #cut 1 #cutoff (sine/rand*4000) # resonance ( "0.1 0.4") # rate 0.5 # room 1 # delay "0.1 0.3 0.5 0.7 0.8 0.9 0.1 0.5 0.6 0.4",
+  slow 2 $ n "{[c3? d4? g4?], [d4? a4@q c5!] , [ ~ ~ c6? ~], [c2 c4?. c2? c5?]}" # sound "superpiano" # gain 0.5 # cutoff (sine/rand*6000) # rate 1.5 # resonance (sine/rand*0.01) # attack 0.1 # room 2
+  ]
+
+d1 silence
+
+  d2 $ slow 1.5 $ striate 4 $ n "0 3 [2 14? 11@q] " # sound "loopp:4" # release 0.1
+
+  d2 silence
+
+  d3 $ stack [
+   n " 0?*3 ~ ~ 3 ~" # sound "909",
+   sometimesBy 0.5 (fast 2) $ n "1*16" #sound "808" # gain 0.7 # attack "0.1 1.4" # crush 5 # pan (sine/rand*500)
+  ]
+
+  d3 silence
+
+  hush

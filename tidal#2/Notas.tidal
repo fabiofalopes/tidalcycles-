@@ -1,0 +1,119 @@
+
+d1 $ sound "{bd*8 sn*8 , hhmntrb*8 , diabloperc:1}" # gain (density 1.75 $ tri)
+
+
+hush
+
+d1 $ every 3 (0.25 <~) $ sound "bd*2 cp*2 hh sn"
+
+
+d1 $ midinote "60 62*2" # s "superchip" #leslie 0.6 #release 0.1
+
+d1 $ jux (# accelerate "-0.1") $ s "supermandolin*8" # midinote "[80!6 78]/8"
+ # sustain "1 0.25 2 1"
+
+d1 $ s "supersaw*8" # midinote "80 84 85 88 89 95 100" # sustain "1 0.25 2 1"  # gain 0.6 # cut 1 # cutoff (sine*2000 - rand + 150)
+
+--------------------------------------------
+
+    Creating Variation in Patterns
+
+    d1 $ every 5 (|+| speed "0.5") $ every 4 (0.25 <~) $ every 3 (rev) $
+    sound "bd sn arpy*2 cp"
+    # speed "[1 1.25 0.75 -1.5]/3"
+
+    d1 $ every 8 (rev) $ every 4 (density 2) $ sound "bd hh sn cp"
+    d1 $ whenmod 16 14 (# speed "2") $ sound "bd arpy*2 cp bass2"
+
+
+d1 $ every 12 (const $ sound "bd*4 sn*2") $ sound "bd sn bass2 sn"
+
+
+-----------------------------------------------
+    Introducing Randomness
+
+
+d1 $ s "arpy*8" # n (irand 30)
+
+d1 $ degradeBy 0.25 $ sound "hh*16"
+
+          sometimes = sometimesBy 0.5
+          often = sometimesBy 0.75
+          rarely = sometimesBy 0.25
+          almostNever = sometimesBy 0.1
+          almostAlways = sometimesBy 0.9
+
+
+----------------------------------------------------------------
+    Layering (Polyrhythms) Instead of Grouping
+
+d1 $ sound "[bd bd bd, sd cp sd cp, arpy arpy, odx]"
+
+d1 $ sound "[bd bd bd, [sd sd] cp, arpy [arpy [arpy arpy] arpy arpy], odx]"
+
+
+-----------------------------------------------------------------------
+    Playing one step per cycle
+
+d1 $ sound "bd <arpy:1 arpy:2 arpy:3>"
+
+
+-----------------------------------------------------------
+    12-tone scale speeds
+
+d1 $ up "0 1 2 3 4 5 6 7 8 9 10 11" # sound "arpy"
+
+--------------------------------------------------------------
+    The Run Function
+
+d1 $ sound "arpy*8" # up (run 8)
+d1 $ sound "arpy*8" # speed (run 8)
+d1 $ sound "arpy*8" # up (every 2 (rev) $ run 8)
+
+d1 $ n (run 4) # s "drum"
+d1 $ sound $ samples "drum*4" (run 4)
+
+d1 $ n (run 10) # s "drum arpy cp hh"
+
+hush
+-------------------------------------------------------------------
+    Euclidean Sequences
+        Exemplos :
+
+d1 $ sound "bd(5,8)"
+
+d1 $ euclid 5 8 $ sound "bd"
+
+d1 $ sound "bd(3,8) sn*2"
+
+d1 $ sound "bd(3,8) sn(5,8)"
+
+d1 $ sound "bd(5,8,2)"
+
+d1 $ euclid 3 8 $ sound "bd*2 [sn cp]"
+
+d1 $ sound "bd([5 3]/2,8)"
+
+      (2,5) : A thirteenth century Persian rhythm called Khafif-e-ramal.
+      (3,4) : The archetypal pattern of the Cumbia from Colombia, as well as a Calypso rhythm from Trinidad.
+      (3,5,2) : Another thirteenth century Persian rhythm by the name of Khafif-e-ramal, as well as a Rumanian folk-dance rhythm.
+      (3,7) : A Ruchenitza rhythm used in a Bulgarian folk-dance.
+      (3,8) : The Cuban tresillo pattern.
+      (4,7) : Another Ruchenitza Bulgarian folk-dance rhythm.
+      (4,9) : The Aksak rhythm of Turkey.
+      (4,11) : The metric pattern used by Frank Zappa in his piece titled Outside Now.
+      (5,6) : Yields the York-Samai pattern, a popular Arab rhythm.
+      (5,7) : The Nawakhat pattern, another popular Arab rhythm.
+      (5,8) : The Cuban cinquillo pattern.
+      (5,9) : A popular Arab rhythm called Agsag-Samai.
+      (5,11) : The metric pattern used by Moussorgsky in Pictures at an Exhibition.
+      (5,12) : The Venda clapping pattern of a South African children’s song.
+      (5,16) : The Bossa-Nova rhythm necklace of Brazil.
+      (7,8) : A typical rhythm played on the Bendir (frame drum).
+      (7,12) : A common West African bell pattern.
+      (7,16,14) : A Samba rhythm necklace from Brazil.
+      (9,16) : A rhythm necklace used in the Central African Republic.
+      (11,24,14) : A rhythm necklace of the Aka Pygmies of Central Africa.
+      (13,24,5) : Another rhythm necklace of the Aka Pygmies of the upper Sangha.
+
+----------------------------------------------------------------------------

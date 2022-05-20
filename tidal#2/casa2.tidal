@@ -1,0 +1,38 @@
+setcps (89/60/4)
+
+
+
+
+d1
+  $ slow 2
+  $ every 3 (# tsdelay 0.5)
+  $ sometimesBy 0.1 (# xsdelay 0.6)
+  $ sometimesBy 0.5 (jux rev)
+  $ sometimesBy 0.05(# n (irand 16))
+  $ jux (iter 2)
+  -- $ degradeBy (1 - rand)
+  $ degradeBy 0.9
+  $ stack [
+    slow 1.5 $ striate 2 $ s "superfm(4,7,4)" # n "{0,7,12} {24 5 12}" # voice 2,
+    s "gabor(4,7)" # n "{24 5 12}" ,
+    s "superfm(7,3)" # n "0 12 7 3 " #voice 3
+  ]
+|+| n "<0 7 -7 -4 4 -12>"
+# resonance "0.2"
+# tsdelay 0.8
+# phaserrate 6
+# phaserdepth 2
+# phasdp 44
+# krush 1.8
+# room 1.1
+# size 0.7
+
+
+hush
+
+
+d2
+  $ stack [
+    s "supermandolin(12,2,7)" #n "{-12 8 . 0 6} {12 24 17 15 17 19 14 . 12 22 24}",
+    s "superhammond(6,2)" # n "0 6 7 14 16 17 11 " # lfo (260*sine) # rate 0.25 # resonance 0.1 # attack 0.5
+      ]

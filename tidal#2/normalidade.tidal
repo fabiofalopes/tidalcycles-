@@ -1,0 +1,32 @@
+setcps (140/60/4)
+
+d1 $stack [
+  degradeBy 0.4 $swingBy (6/3) 4 $ n "2*6" #s "gripspercs" # n (irand 16) # release 0.2 # crush 2,
+  -- swingBy (0.25) 12 $ n "0 ~ . 0 0?@q" # s "gripskick" ,
+  n "~ 1" # s "gripssnares",
+  degradeBy 0.4 $swingBy (6/3) 4 $ n "11  22 6 12 . 11 44 55" # s "gripsextra" # release "0.5 0.5 0.6 0.7 1" # release 0.1 # room 1 # gain 0.2 # n (irand 128) # hpf 1500 #crush 16
+  ]
+
+  d1 $stack [
+    n "~ 10  " # s "charlieperc" #cut 1 # crush 2,
+    n "4 2 ~ ~ ~" # s "charliehats",
+    sometimesBy 0.7 (# speed 1.70) $ n "2*8" # s "gripsfx" # bpf 5000 # speed 1.66 # crush 3 # gain 0.8
+    ]
+
+d1 silence
+
+d2
+-- $sometimesBy 0.1 (jux(rev))
+-- $sometimesBy 0.1 (#speed 0.5)
+-- $sometimesBy 0.2  (jux (iter 16))
+$sometimesBy 0.5 (#irand 2)
+$n "0 1 5 6 4 12 15 16" # s "dx7so" # cut 1 # speed 1.5 # cutoff (sine*1500 - rand) # resonance (rand - 0.3) # room 0.2 # size 0.1
+
+
+  -- # speed "[1 1.5 0.75 -1.25]/4"
+
+
+d4 $ degradeBy 0.5 $ swingBy (0.25) 3 $ n (arp "<downup  disconverge diverge >" "<d'7sus4'8>") # s "superhammond" #leslie 2 # cutoff (sine*15500 - rand) # resonance (rand - 0.8) # room 0.8 # gain 0.8
+
+
+hush

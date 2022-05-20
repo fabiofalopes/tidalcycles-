@@ -1,0 +1,38 @@
+setcps (92/60/4)
+
+d1
+  $ fast 0.25
+  $ sometimesBy 0.05 (#n (irand 16))
+  $ stack [
+    n (scale "shang" "0*4 6*4") # s "supergrind" # accelerate (0.001) # voice 0 # detune 1 # room 0.25 # size 0.5 # attack 0.1,
+    n (scale "shang" "0 1 2 3 4 5 6 7") # s"supergrind" # distort 0.4 # ring 15 #detune 7,
+    n (arpg "'shang {4 0 9 4 7 9}") #s "superhammond"
+] #gain 0.4 # room 1 # size 0.25
+
+hush
+
+d1 $ n (arpg "'7sus7 [0 ~  6  4 12@q]") # s "supergrind"
+
+d1 $ n (arpg "'7sus7 [{1, 2?, 3~, 5} 12]") # s "supergrind"
+
+
+d1 $ n (scale "shang" "9 11 13") #s "supersaw" #cutoff (sine*1500 - rand*100) #rate 0.1
+
+
+d2
+      $ sometimesBy 0.01 (fast 1.01)
+      $ degradeBy 0.1
+      $ stack [
+    n "0?  1 ~0? [1 ~ ] 0? . 1?  1?"  #s "super808" # distort 0.8,
+    sometimesBy 0.5 (jux(rev)) $ degradeBy 0.6 $ n " 7? " # s "super808" # gain 0.8,
+    sometimesBy 0.2 (jux(rev)) $ degradeBy 0.7 $ n "4*3" # s "super808",
+    n "~ 0 ~ ~ " # s "supersnare" # decay 0.6,
+    sometimesBy 0.1 (jux(rev)) $ degradeBy 0.2 $ n "3*12" # s "superhat" #n rand # hpf 5800 # gain 0.8 # distort 0.4,
+    sometimesBy 0.05 (jux(rev)) $ degradeBy 0.5 $ n "0 0 0 " # s "superclap",
+    degradeBy 0.9 $n "-24?" # s "soshats" # gain 0.8
+    ]
+
+
+
+
+    hush

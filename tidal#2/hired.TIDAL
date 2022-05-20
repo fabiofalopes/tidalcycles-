@@ -1,0 +1,35 @@
+setcps (140/60/4)
+
+d1
+-- $swingBy (2/3) 4
+$ sometimesBy 0.08 (# squiz 8)
+$ sometimesBy 0.1 (# n (irand 2))
+-- $ sometimesBy 0.1 (jux(rev))
+ -- $ struct (iter 2 "t(5, 9,8)")
+ -- $ off 0 (|- 1)
+$stack [
+  -- n "1 2 4 4 " # s "kickmntrb" # n (irand(16)) # crush 8,
+  degradeBy 0.5 $ n "1*16" # s "hhmntrb" # n (irand(2)) #release 0.1 # gain 0.7,
+  n "~ ~ 6" # s "snrmntrb" # crush 1 # gain 0.9,
+  degradeBy 0.2 $ n "q 5 . 9 5 ~ ~  ~ " # s "diabloperc" # release 0.1 # speed 0.3 # crush 2,
+  degradeBy 0.9 $ n " 0 ~[ 0 0 0?] ~ ~ " # s "sostoms" # speed 0.4
+]
+
+d1
+-- $swingBy (2/2) 2
+$ sometimesBy 0.08 (# squiz 8)
+$ sometimesBy 0.1 (# n (irand 2))
+$ sometimesBy 0.1 (jux(rev))
+ $ struct (iter 2 "t(5,8)")
+ $ off 0 (|- 2)
+$stack [
+  degradeBy 0.4 $ n "1 2? 4 4 " # s "super808" # n (irand(1)) # crush 8,
+  degradeBy 0.5 $ n "0*16" # s "sosohat" # n (irand(2)) #release 0.1 # gain 0.7,
+  n "~ ~ 6" # s "snrmntrb" # crush 1 # gain 0.9,
+  degradeBy 0.1 $ n "q 5 . 9 5 ~ ~  ~ " # s "superclap" # release 0.1 # speed 0.3 # crush 2,
+  degradeBy 0.9 $ n " 0 ~[ 0 0 0?] ~ ~ " # s "sostoms" # speed 0.4
+]
+
+d1 $ sometimesBy 0.5(# n(irand(16)))$ n "~ 0 ~ .  ~ 0 ~ 1 " # s "superclap" # crush 4
+
+hush

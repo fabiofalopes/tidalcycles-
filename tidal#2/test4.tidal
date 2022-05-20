@@ -1,0 +1,78 @@
+setcps (120/60/4)
+
+hush
+
+
+
+
+
+hush
+
+d3
+  $ every 2 (rev)
+  $ every 3 (degradeBy 2)
+  $ every 4 (#crush 6)
+  $ stack[
+    n "9*12" # sound "mizo" # speed 12 # n (irand 6) #gain 0.6,
+    n "30*12" # sound "mizo" # speed 24 # n (irand 6) #gain 0.6
+    ]
+
+hush
+
+
+
+
+
+
+
+
+
+-----------------------------------
+
+
+
+
+
+
+d1
+  $ fast 0.4
+  $ every 3 (rev)
+  $ every 8 (fast 0.5)
+  $ every 4 (degradeBy 6)
+  $ sometimesBy 0.3 (# speed 0.5)
+  $  stack [
+    n "{0(3,8) 3(7,19), 5 }" #up "<-12 -24 0 -24 -12>" #sound "arpy" # n (irand 16) # resonance (rand + 1) #cutoff(rand - 15000) # gain 0.9,
+    n "{0 0 6 , 0}" #up "<-12 12 0 12 -12>" #sound "arpy" # n (irand 16) #cutoff(rand - 15000) # gain 0.6
+    ]
+    #delay 2
+    #room 1
+    #gain 0.7
+
+d1 silence
+
+    d3
+      $ every 2 (rev)
+      $ every 3 (degradeBy 6)
+      $ sometimesBy 0.4 (# speed 0.5)
+      $stack[
+    n "{4?*4, 4?(3,2) , 1?(2,7), 11(3,6)}  {4?*2, 4?(1,2) , 1?(2,7), 11?(3,6)}" #sound "glitch" # speed 4
+    ]
+
+
+d4 $ stack [
+n "1 4 8 9" # sound "dx7so" #legato 1 ,
+n "{6, 12, 300 }" # sound "stabed" # legato 1 # speed 0.8 #gain "0.8"
+]
+
+
+
+d5
+  $ slow 2.5
+  $ every 2 rev
+  $ sometimesBy 0.2 (fast 2)
+  $ splice 8 "1 2 3 3?" $  sound "breaks152"
+
+d5 silence
+
+
+    hush

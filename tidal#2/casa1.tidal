@@ -1,0 +1,20 @@
+setcps (140/60/4)
+
+d1 $ sometimesBy 0.8 (# tsdelay 1) $every 3 (# xsdelay 0.2) $ sometimesBy 0.8 (jux rev) $ degradeBy 0.8 $ sometimesBy 0.1(# n (irand 16)) $ slow 2 $ stack [
+  n (arpg "'major7 [0,4,7,11]") # s "supervibe" # release (1 - 2*sine*rand) # cutoff (sine*5500 + rand*100),
+  n (arpg "'major7'9@ [0?,4,7?,11@1]") # s "supermandolin" # delay 0.2 # pan rand,
+  slow 8 $ n (arpg "'major7 [0,4,7,11]") # s "supergrind" # cutoff (sine * 5000 ) # resonance "0.1 0.2 0.5 0.4 0.6 0.2" # delay 16 # room 2 # gain 0.5,
+  n (arpg "'major7 [0,4,7,11]") # s "superhat" # hpf "800 1500" # gain 0.8,
+  slow 1.5 $ n (arpg "'leadingWhole'9@ [0?,4,7?,11@1]") # s "superfm" # crush 2 # cutoff (sine*1500 +rand ) # rate rand # room 16 # gain 0.5
+  ] # phaserrate 1 # leslie 6 # lrate 0.7 #lsize 0.5
+
+
+
+d2 $ degradeBy 0.7 $ sometimesBy 0.2 (# xsdelay 1) $ stack [
+  -- n "3?*4 . 2? . 3 2?" # s "diablokick" # speed 0.95,
+  sometimesBy 0.2 (jux rev) $ n "1?*12 7" # s " superhat",
+  n "~ 0? " # s "superclap" # squiz 2,
+  degradeBy 0.5 $ sometimesBy 0.5 (# n (irand 4)) $ n "{ 0 5? 6 . 5 3?@ .  1 1? . 2 3} 3 " # s "tablasome" # release 0.1 # crush 6
+  ]
+
+  hush

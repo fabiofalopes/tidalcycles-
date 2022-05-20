@@ -1,0 +1,10 @@
+setcps (150/60/4)
+
+d1 $ stack [
+  slow 2 $ n "7(11,24,14)" #s "superhat" # crush 6,
+  -- every 4 (rev) $ n "4*2" # s "soshats",
+  n (scale "jiao zhi" "{0 0 8 ~}") # s "supergong",
+  sometimesBy 0.5 (density 2) $ n (scale "jiao zhi" "[5 .. 5] , 12 .. 12 ") # s "supersquare"
+  ]# cutoff (sine/rand*6000) # rate 1.5 # resonance (sine/rand*0.01) # attack 0.1 # room 2
+
+hush

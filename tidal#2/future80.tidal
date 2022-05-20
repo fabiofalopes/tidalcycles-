@@ -1,0 +1,29 @@
+setcps (80/60/4)
+
+
+d1$degradeBy 0.2
+  $sometimesBy 0.1 (# n (irand 16))
+  $sometimesBy 0.1 (jux(rev))
+  $sometimesBy 0.9 (#speed 0.5)
+  $sometimesBy 0.2  (jux (iter 16))
+  -- $ jux (iter 6)
+  -- $ jux (iter 4)
+  $stack [
+  splice 16 "0 1 2 3 4 5@ 6 7 8 . 9 10 . 11 12 13 14 15" $ s "prussrec145:1" # release 5 - rand*2,
+  -- splice 16 "0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15" $ s "prussrec145:2" # cut 1 # crush 8,
+  splice 16 "6 6 . 5 4 . 4*8 . 5 5" $ s "prussrec145:3",
+  splice 32 "44*16 5*8 4 25" $ s "prussrec145:2" # n (irand 16),
+  slice 8 "[<0*8 0*2> 3*4 2 4] [4 .. 7]" $ sound "breaks165" # squiz 2 # gain 0.7
+  ]
+
+
+d1 silence
+
+
+hush
+
+d3$ stack [
+  n "c2" # s "supermandolin",
+  n (arpg "'minor7 [0 5 ,4,7 4*3,11*2]") # s "superfm" # gain 0.6,
+  n (arp "<up down diverge>" "<c'sevenFlat5'2") # s "superpiano" # gain 0.8
+]

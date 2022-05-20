@@ -1,0 +1,23 @@
+setcps (140/60/4)
+
+d1
+$ every 2 (degradeBy 0.1)
+$ every 4 (rev)
+$ every 8 (jux (rev))
+$ every 2 (# crush 12)
+$ sometimesBy 0.2 (#room 0.1)
+$ every 8 (# delay 0.8)
+$ n "{[c4 e4 g4?@], a3 g3 c3 b3, [c5 d5 ] [e5 a5] [c5 d5 e5 a5] , [c6 c6 a6 g6] [c7 b6 g6 a6] , [c2 a5]}" # sound "supersaw" #attack ("0.1 0.5 ") #release ("0.5 0.6")
+#gain 0.8
+
+hush
+
+d2
+$ every 2 (fast 2)
+$ every 2 (# n (irand 16))
+$ every 4 (# speed 0.5)
+$ every 8 (jux (rev))
+$ every 16 (# n (irand 8))
+$ every 8 (slow 2)
+$ every 4 (slow 2)
+$ n "2 4 5 6 3 34 1 2 " # sound "808" # release ("0.1 0.5") # attack ("0.1 0.21") #gain 0.8

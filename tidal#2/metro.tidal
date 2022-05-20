@@ -1,0 +1,73 @@
+setcps (140/60/4)
+
+d1 -- egyptian
+      $ sometimesBy 0.4 (#speed 0.5)
+      $ sometimesBy 0.2 (#squiz 1.2)
+      $ sometimesBy 0.1 (jux(rev))
+       $ struct (iter 2 "t(5,8)")
+       $ off 0 (|- 7)
+      $ stack [
+  n (scale "egyptian" "{0 , 9  8, 10 5 2?, 15 14 12, 12 19 18 20}") # sound "supersaw" #cutoff (sine*1500 + rand*200) #release 0.9 # room 1 # size 2,
+  n (scale "egyptian" "7? 8?@q 6 7 8  ~ 11 12? 13 14 12? 14 16") # s "supervibe" # crush 5 #cutoff(sine*15500 + rand*1000) # resonance "0.1 0.45 0.1 0.1 0.2",
+  n (scale "egyptian" "0 ") # s "supermandolin"
+  ] # gain 0.9
+
+hush
+
+  d1 -- ritusen
+        $ sometimesBy 0.4 (#speed 0.5)
+        $ sometimesBy 0.2 (#squiz 1.2)
+        $ sometimesBy 0.1 (jux(rev))
+         $ struct (iter 2 "t(2,2,3)")
+         $ off 0 (|- 7)
+        $ stack [
+    n (scale "ritusen" "{0 , 9  8, 10 5 2?, 15 14 12, 12 19 18 20}") # sound "supersaw" #cutoff (sine*1500 + rand*200) #release 0.9 # room 1 # size 2,
+    n (scale "ritusen" "7? 8?@q 6 7 8  ~ 11 12? 13 14 12? 14 16") # s "supervibe" # crush 5 #cutoff(sine*15500 + rand*1000) # resonance "0.1 0.45 0.1 0.1 0.2",
+    n (scale "ritusen" "0 ") # s "supermandolin"
+    ] # gain 0.9
+
+d1 -- zhi
+$ sometimesBy 0.4 (#speed 0.5)
+$ sometimesBy 0.2 (#squiz 1.2)
+$ sometimesBy 0.1 (jux(rev))
+ $ struct (iter 2 "t(5,8)")
+ $ off 0 (|- 7)
+$ stack [
+n (scale "zhi" "{0 , 9  8, 10 5 2?, 15 14 12, 12 19 18 20}") # sound "supersaw" #cutoff (sine*1500 + rand*200) #release 0.9 # room 1 # size 2,
+n (scale "zhi" "7? 8?@q 6 7 8  ~ 11 12? 13 14 12? 14 16") # s "supervibe" # crush 5 #cutoff(sine*15500 + rand*1000) # resonance "0.1 0.45 0.1 0.1 0.2",
+n (scale "zhi" "0 ") # s "supermandolin"
+] # gain 0.9
+
+
+hush
+
+d2
+      $ fast 1
+      $ sometimesBy 0.3 (# squiz 5)
+      $ degradeBy 0.7
+      $ sometimesBy 0.08 (# squiz 8)
+      $ sometimesBy 0.5 (# n (irand 16))
+      $ every 2 (rev)
+      $ stack [
+        n "4 4? 4 4?" # s "kickmntrb" # crush 5 # gain 1.2 # speed 0.9 #cutoff(saw*1800 + rand*1000) # release 0.9
+        -- sometimesBy 0.2 (jux(rev)) $ sometimesBy 0.5 (# n (irand 16)) $ n "0*8" # s "hhmntrb" # gain 0.9 # release 0.1 # crush 2
+        ] #attack "0.01 0 0.01 0 0.01 0 0.02 0.01"
+
+
+hush
+
+
+d2
+    $ fast 2
+    $ degradeBy 0.05
+    $ stack [
+ degradeBy 0.3 $ n "0 [~ 0] [~ 0?] 0?" # s "diablokick" # n (irand 6) #crush 5,
+ n " ~ 3" # s "snrmntrb" # crush 3 ,
+ n "0*8" # s "hhranho" # crush 5 # n (irand 4) # speed 1.02 # gain 0.9 # hpf 80 # release 0.3,
+ slow 2 $splice 4 "1 2 3 4 5?" $ s "prussrec145:2" # release 0.2 # crush 2 # gain 0.6,
+ -- splice 4 "0 1" $n "{5 } {7 0 12}" # s "loopp" #release 0.9 # gain 0.8,
+ splice 2 "0*8" $ s "loopp:30" # release 0.1 # crush 6 # gain 0.7
+  ]
+
+
+hush

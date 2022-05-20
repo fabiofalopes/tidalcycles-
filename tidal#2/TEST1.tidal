@@ -1,0 +1,109 @@
+setcps (70/120/2)
+
+setcps (80 /120/2)
+
+setcps (95/120/2)
+
+setcps (105/120/2)
+
+setcps (120/120/2)
+
+setcps (140/120/2)
+
+d1 $ n "[4 ~] [~ [1 ~]] [[[1]5]~ ]  5" # s "kickmntrb"
+  -- # crush 16
+  # lpf 10000
+--  # speed (rand + 0.5)
+  # n (irand 16)
+  # gain 1.1
+
+hush
+
+  d1 silence
+
+
+  d1 $fast 1
+  $every 2 (fast 0.5) $ striate 3 $ slow 2 $ jux (rev . (slow 1.5)) $ stack [
+   n "[0 0] 0 3 [1 0 1*2]"  #sound "tablasome" # n (irand 5) # gain 0.6 # pan (rand + 0.9) ,
+   n "0 [0 0 ] 0 0 " # sound "hhpsp" # n (irand 16) # gain 0.5,
+   n "~ ~ ~ ~ ~ ~ ~ 8 " # sound "baumbreaks" # n (irand 16) # gain 0.4 # pan (rand + 15)
+  ] #room 1
+
+
+
+d3 $ n "0*6" # sound "jv1080" # gain 0.35 # n (irand 4) # room 1 # delay 1
+
+d2 silence
+
+d3 $ sound "mizo*7"
+  # n (irand 15)
+  # hpf "500"
+  # pan (rand + 0.1)
+  # speed (rand - 12)
+  # gain 0.5
+
+  d3 silence
+
+hush
+
+
+
+d5 $ n "[1 2] [2 2] "#sound "andrz"
+#rev 0.8
+# speed (rand -8 )
+# pan (sine/rand - rand +1 )
+#n (irand 5)
+ # delay 6 #lpf 800 # resonance 1 #room 0.8 # gain 0.8
+# gain 0.25
+# room 2
+
+d5 silence
+
+
+hush
+
+d6
+$fast 0.7
+$ every 3 (fast 0.8)
+$ every 2 (fast 0.4)
+$ every 8 (fast 0.5)
+$ stack [
+n "[13 8 13] [6 6] [112 8 2 ] [2123 6]" #sound "timkahn" # n (irand 2) # gain 0.8,
+n "0 0  " # sound "timkahn" # n (irand 2) # gain 0.6
+]
+#gain 0.4
+
+d6 silence
+
+
+
+d7  $ striate 51 $ every 8 (fast 0.5) $ n "50 55 11 " #sound "celloso:5"
+  # n (irand 16)
+  # speed 0.6
+  # gain 0.7
+  -- # lpf 10000
+
+
+d7 silence
+
+hush
+
+-- ----------------------------
+d1 $ every 8 (density 2) $ iter 4  $ brak $ rarely (fast 2 )  $ stack[
+n"0*3 " #sound "leadbassmntrb" #n (irand 16) # lpf 15000 #resonance "0.2" # gain 0.5 # speed "[1 1.5 0.75 -1.25]/4",
+n"0*7 " #sound "leadbassmntrb" #n (irand 16) # lpf 1800 #resonance "0.3" # gain 0.6 # speed "[1 1.5 0.75 -1.25]/4"
+]#speed "[[0.1 ,0.8][0.5, 1.2][0.25 0.75]]" # room 1 # gain 0.1
+
+d1 silence
+
+d2 $ every 8 (density 2) $ iter 4  $ brak $ rarely (fast 2 )  $ stack[
+n"6*3 " #sound "stabed" #n (irand 16) # lpf 20000 #resonance "0.2" # gain 0.5 ,
+n"24 " #sound "stabed" #n (irand 8) # lpf 5000 #resonance "0.3" # gain 0.6
+]#speed "[[0.1 ,0.8][0.5, 1.2][0.25 0.75]]" # hpf 150 # room 1
+
+
+d2 silence
+
+
+
+hush

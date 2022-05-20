@@ -1,0 +1,9 @@
+setcps (140/60/4)
+
+d1 $ stack[
+  fast 2 $ n "[5 4 ] [9 5?] ~ [9 9]" # sound "formanta",
+  sometimesBy 0.5 (fast 2) $ sometimesBy 0.2 (fast 4) $ splice 16 "{[0 1 2 3], [4 16] [6 20 40?]}" $ sound "pfmcas120" #release 0.1 # cutoff (sine/rand*3000 + rand )#rate 0.5 # resonance (0.1*rand*sine),
+  slow 4 $  n "21 27@q 30 " # sound "mizo" # release 0.7
+]
+
+hush

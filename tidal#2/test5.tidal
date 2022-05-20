@@ -1,0 +1,51 @@
+setcps (140/60/4)
+
+d1
+$ every 2 (#crush 8)
+$ loopAt 2 $ striate 3 $ sound "breakmutante"
+
+d1 silence
+
+d2
+$every 2 (#speed 0.5)
+$every 4 (fast 1.5)
+$every 6 (degradeBy 2)
+$sometimesBy 0.1 (#delay 1)
+$every 8 (#room 2)
+$ slow 2 $ loopAt 8 $ striate 16 $
+  stack [
+    sound "loopp" # legato 1 ,
+    sound "loopp:3"
+  ] # gain 0.8 # crush 9 #lpf (sine*1100 -1500) #bpf (sine*15000 - rand)
+
+  d2 silence
+
+
+d5
+  $sometimesBy 0.1 (#delay 1)
+  $every 8 (#room 1)
+  $ slow 2 $loopAt 6 $ striate 8 $ stack [
+    sound "loopp:8?",
+    sound "loopp:18*4?" # cutoff (sine) # gain 0.6,
+    sound "loopp:30?" # gain 0.5
+  ]
+    # cutoff (sine + 5000)
+    # crush 6
+    # pan (rand + 1)
+    # gain 0.8
+    -- #lpf (sine*1100 -1500) #bpf (sine*15000 - rand)
+
+
+
+    d7 $loopAt 2 $ splice 8 "0 1 2 3 4 5 6 7" $ sound "breaks152"
+
+    d7 $loopAt 16 $ splice 8 "0 1 2 . 3 4 . 5 6 7" $ sound "loopp:45"# speed (range 0.5 1.5 sine)
+
+    d7 $ sound "loopp:48" # speed 1 # unit "c" # begin 0.2 # end 1 # gain 0.5
+
+
+
+
+
+
+hush

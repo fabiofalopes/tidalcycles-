@@ -1,0 +1,107 @@
+setcps (140/60/4)
+
+d1
+$ slow 1
+$ every 8 (#speed 0.5)
+$ every 12 (#speed 0.8 )
+$ every 12 (#crush 6)
+$ every 32 (rev)
+$ every 4 (#squiz 1)
+$ every 16 (#n (irand 9))
+$ every 8 (rev) $ every 16 (density 1)
+$ splice 16 "0 1 2 0 4 5 3? 5 8? 6 9 11? 15? 16 14 0 " $ sound "breakmutante"
+
+d1 silence
+
+--------
+d2
+$ slow 2
+$ every 2 (#speed "0.5 0.9")
+$ every 3 (# delay 0.1)
+$ sometimesBy 0.6 (slow 2)
+$ stack [
+  n "0 0 [0 0] . 1 1 1 ~ 1 . [5 5] 5 8 9 5@q" # sound "formanta" # gain 0.8 # release 0.2 ,
+  degradeBy 0.9 $ n "0 0 0? 0 0 0?   " # sound "calimbado" # n (irand 2) # gain 0.6 # cutoff (sine*1000) # resonance "0.1 0.5" # hpf 600,
+  n "5 2 3 5 6  ~  ~ " # sound "jv1080" #release 0.1 # gain 0.6
+]
+
+-------
+
+d2
+  $ every 4 (# room 0.1)
+  $ every 8 (jux (rev))
+  $ slow 4
+  $ stack [
+      striate 6 $ n "[0 1 2@q] 2? [4 6? 5@t]" #sound "loopp" # release 0.1,
+      striate 2 $ n "8" #sound "loopp" # release 0.5
+      ]
+        # cutoff "800 15000"
+        # pan (rand)
+        # size 0.5
+        # room 0.05
+
+hush
+
+-----------------------------------------
+
+d2 $ stack [
+  striate 2  $ n "[1 ~  1 1 ~ ] [5 6 8 ~] " #sound "loopp" # release 0.1,
+  n "{[9 7 4], [55 28  22 44 ] 2  , 99 }" # sound "celloso" #attack 1 # r
+
+  elease 0.1 # n (irand 4) # speed 0.3  # gain 0.4
+  ]
+
+
+--------------------------------------
+
+d1
+   $ every 2 (#speed 0.1)
+   $ sometimesBy 0.1 (density 2)
+   $ every 8 (slow 3)
+   $ every 4 (#crush 9)
+   $ every 6 (#n (irand 3))
+$ stack [
+  sometimesBy 0.7 (# room 0.05) $ every 4 (rev) $ every 2 (# speed 0.5)  $ n "[2 [0 0]] 1@q ~ [0? . 6@t]" # sound "808" # cutoff ("900 15000 500 600") # resonance ("0.1 0.2 0.23 0.5")#lpf (sine*1100 -1500) #bpf (sine*15000 - rand) # gain 0.6,
+  every 16 (density 0.8) $ every 2 (density 0.1) $every 5 (density 0.2) $ n " [0 [~  3]] 0@t 0 0" # sound "909" #lpf (sine*1100 -1500) #bpf (sine*15000 - rand),
+  sometimesBy 0.1 (const $ striate 4 $ sound"alex:2" #speed 0.7 #cut 1 #gain 0.6) $ every 8 (density 1) $every 4 (degradeBy 0.8) $ striate "32 " $ sound "alex" # release 0.2 # n (irand 8)#lpf (sine*1100 - 15000) #bpf (sine*10000 + rand) # gain 0.7,
+  sometimesBy 2 (#room 0.04) $ every 8 (density 0.5) $ every 4 (#speed "0.2 0.5") $ splice 32 "{ 0  0  5 } " $ sound "loopp:5" # release 0.5 # speed 0.5 # cutoff (15000*sine*rand - 100) #resonance (sine*"0.1 0.2") # gain 0.5 # speed 1.2
+  ] #crush 5 # room 0.1
+
+
+  hush
+
+---------------------------------------
+
+d1 $ stack[
+      n "{1 1? ~ 1?, 2 [2? 2 2?]}" #sound "uxay" # lpf 1800 # n (irand 4),
+      n "3 ~ ~ ~" # sound "kickpsp" # gain 0.8 # speed 0.8,
+      striate 4 $ n "4 7 5" # sound "leadbassmntrb" #release 0.1 # n (irand 16) # cutoff(sine*15000) # rate "0.4 0.5" # resonance "0.2 0.5 sine" # gain 0.8,
+      every 4 (const $ striate 8 $ sound "808:1" # gain 0.7) $ sometimesBy 0.1 (slow 0.5 ) $ every 8 (const $ sound "808:1*12" # gain 0.8) $ sometimesBy 0.1 (const $ sound "808:1*16") $ n "1*8" # sound "808" # gain 0.7,
+      n "~ ~ 3? ~" # sound "808sd"
+      ]
+
+
+
+--------------------------------------
+
+d8
+$slow 6
+$every 16 (slow 4)
+$every 16 (# n (irand 2))
+$sometimesBy 0.2 (#speed "0.4 1")
+$every 8 (jux (rev))
+$sometimesBy 0.2 (#squiz 1.1)
+$sometimesBy 0.8 (#speed 0.2)
+$ striate 16
+$ stack [
+  n "6 8  10*3" # sound "loopp"  # cut 1 # gain 0.05 # hpf 15000,
+  n " 7 7" # sound "loopp" # release 0.1 # speed 0.9#lpf (sine*1100 -1500) #bpf (sine*15000 - rand) # gain 0.2,
+  n " {15?  2! 3? 6 , 3@q 33 ~ 2, 2 15@t 84 2@q , [2 6 ] 1 }" #sound "loopp" #release 0.1 # speed 1.5 #cutoff ( saw*1000)
+    ]
+    # delay 5
+    #lpf (sine*1100 -1500) #bpf (sine*15000 - rand)
+    # gain 0.5 # crush 4
+    # room 0.8 # size 0.5
+
+
+hush

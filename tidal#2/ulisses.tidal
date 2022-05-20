@@ -1,0 +1,88 @@
+setcps(160/120/2)
+
+hush
+
+d1
+$ every 8 (# irand 16)
+$ every 8 (# speed 0.5)
+$ every 4 (# gain (0.7*sine))
+$ sometimesBy 0.5 (# squiz 5)
+$ sometimesBy 2 (# speed "1.09 1.1 1.111")
+$ sometimesBy 0.08 (#cutoff (sine/rand*15000+5000))
+$ sometimesBy 0.05 (#bpf (sine + 18000 - rand))
+$ stack[
+  every 4 (const $ n "0 0?  [~ ~  0?@q] ~ " # s "super808") $ sometimesBy 0.4 (#crush 10) $ sometimesBy 0.2 (#squiz 1.1) $ n "[0? [~ 0?@q] ]0? 0 [0@q 0?@q] ~" # s "super808" #gain 1.1 #n (irand 1),
+  -- sometimesBy 0.2 (# crush 8) $ every 5 (#gain sine) $ every 3 (#gain 1.1) $ degradeBy 0.1 $ splice 16 "1 5 [4? 0?@q] 4?" $ s "psparkle72:7" #cut 1,
+  every 4 (# speed "1.001 1.002 0.999 0.989") $ every 2 (# speed 0.999) $ slow 3 $ splice 16 " 0 1 2 5 6 7 " $  s "pdubxandr140:3" # leslie 16 # gain 0.55 # room 0.1 # size 0.2,
+  slice 4 "0@q ~ [3 ~ 4?@q] ~" $ s "breakmutante:4" # release (0.3* sine/rand*1.5) # cut 1 # cutoff (sine/rand* 12000) # rate 2 # room 0.01 #gain 0.8,
+  splice 16 "0  5 6 4  7 " $ s "pdante116:12" # gain 0.8 # speed 0.7,
+  sometimesBy 0.4 (# squiz 4) $ n "{0 . ~ 1? . ~ 4 . ~ , 6 ~ 2? ~ }" # sound "tablasome" # gain 0.46 # leslie 5 # cutoff (sine/rand*15000) # rate sine # resonance ("0.1 0.4"*sine)
+  ]
+
+-----------------------hihats~~
+
+  d2 $ fast 1 $ sound "hhmntrb:0*16"
+    # gain 0.4
+    # speed (rand + 0.8)
+    # n (irand 3)
+    # hpf (18800*sine + rand) # rate 8
+    # crush 2
+    # room 1
+
+    d2 silence
+
+--------melodi
+  d3
+  $sometimesBy 0.8 (#attack 0.1)
+    $ sometimesBy 0.2 (#room 0.3)
+    $ sometimesBy 0.2 (jux(rev))
+    $ every 4 (# room 0.5)
+    $ striate 1
+      $ n "{c3?*8, b6*4 , a4 b4?, b6, [c6? d6 c6 a6 f6 g6 f6 a6]}"
+        # sound "supermandolin" # lpf (sine*0.5 + 12000 - rand) # cutoff (sine*20000) # rate 0.01 # resonance "0.1 0.15 0.11"
+
+        d3 silence
+
+hush
+
+  d4 $ fast 0.5 $  stack [
+        n " 6 " #sound "stabed"  # pan (rand + 0.8) #n (irand 16),
+        n "~ 8 " # sound "stabed" # gain 0.9  # pan (rand + 0.5) #n (irand 16),
+        n "~ ~ ~ 7" # sound "stabed" # gain 0.8  # pan (rand + 0.1)#n (irand 16),
+        n "55" # sound "stabed" # gain 0.8  # pan (rand + 0.1)
+        ] # gain 0.4 #room 2.2 #delay 0.1 # pan (rand*sine) # cutoff (sine*48444 + sine + rand) # rate 1
+
+d4 silence
+
+d5 $ n "{ab3(7,3,4) , bb3 eb3, eb4(1,2) d4 gb4 ab5(7,5,1)}" #s "supermandolin" # velocity (11096*sine/rand) #cutoff (sine/rand*5500)
+
+
+
+
+------- drums 2
+
+        d8
+          -- $ slow 2
+          $ every 3 (slow 2)
+          $ every 4 (rev)
+          $ every 8 (#crush 8)
+          $ sometimesBy 0.6 (# speed 0.5)
+          $ every 16 (# speed 0.5)
+          $ every 2 (#cps 0.5)
+          $ every 2 (#n (irand 17))
+          $ every 8 (const $ sound "breakmutante" # legato 1 # speed 0.5 # gain 0.5 # room 0.1 # delay 0.2)
+          $ every 4 (const $ sound "hhpsp* 8" # speed 0.4 # gain 0.4)
+          $ stack[
+            n "4?(3,8) 1(2,3)" # sound "808" #n (irand 5) #cps 0.5 # gain 0.8 #cps 0.5,
+            -- n "[2(4,5)] [2?(3,6)]" #sound "diabloperc" #speed 0.3 # n (irand 2)  #gain 0.3 #squiz 1 #release 0.2,
+            n "0?(3,4) 0?(6,4) 1?(3,6)" # sound "bd" #speed 0.4,
+            n "15?(6,4) ~ ~ ~" #sound "dbz" #gain 0.5 # n (irand 16) # speed 0.4 # room 1
+            -- n "3?(7,9) 1?" # sound "kickmntrb" # gain 0.4 # speed 0.5 # crush 9
+            ]
+            # gain 0
+            # lpf (50*sine) # rate 2
+
+
+        d8 silence
+
+hush

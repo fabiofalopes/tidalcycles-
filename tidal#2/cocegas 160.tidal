@@ -1,0 +1,60 @@
+setcps (160/60/4)
+
+d1
+  $ fast 1
+  $ every 2 (#speed 0.8)
+  $ every 3 (fast 2)
+  $ every 4 (# n (irand 8))
+  $ every 4 (fast 0.999)
+  $ stack [
+  n "q 5 . 9 5 ~ ~  ~ " # s "diabloperc" # cut 1 # speed 0.5
+]  # release 0.1 # hpf 500 # room 0.009 # size 0.01
+
+
+d2
+$ every 4 (# n (irand 2))
+$ stack [
+      n "[0 8@ 6] 0?@q 0 1?" # s "mizo" # release 0.1  # n (irand 26) # speed 0.8
+    ] # gain 0.6
+
+
+d3
+  $ every 4 (# n (irand 16))
+  $ sometimesBy 0.5 (# speed 0.98)
+  $ n " 1 2 3 0 .5 4 2 3 5 9 . 44 5 3 6  3 1 . 7 5 3 1 5 6 2"  # s "timkahn" # release 0.2 # speed 0.5 # gain 0.7 # hpf 800
+
+hush
+
+
+
+d4
+  $ every 2 (slow 2)
+  $ every 2 (fast 1.1)
+  $ every 4 (#speed 0.99)
+  $ sometimesBy 0.9 (#crush 10)
+  $ sometimesBy 0.2 (jux(rev)) $ every 16 (# n (irand 4))
+  $ stack [
+      n "0 1 5 1 13?@q ~" # s "dx7so" # release 0.5 # lpf (rand) # rate 4 # room 0.2 # size 0.2,
+      n "0 1 2 3 4 5 " # s "cellofx" # release 0.2 #gain 0.9
+      ]
+
+
+      hush
+
+
+
+      d5
+        $ fast 1
+        $ every 8 (#speed 0.5)
+        $ sometimesBy 0.2 (jux(rev))
+        $ degradeBy 0.17
+        $ n "{0@ 1?@ 6@ 0 ~}{1 6 7}{4 6}" # s "loopp" # n (irand 128) #release 0.1 # crush 10 #squiz 2
+
+
+
+
+d6 $ sometimesBy 5 (slow 2) $sometimesBy 0.2 (#squiz 1) $ n "{0 1 2} {2 6 7? 3}" # s "kickpsp" # gain 1.5 # release 0.2 # lpf (rand*sine*1000) # resonance 0.2 # hpf 75
+
+
+
+hush
